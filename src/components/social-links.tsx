@@ -2,6 +2,15 @@ import Image from "next/image";
 import type { SocialProfile } from "@/lib/profiles";
 import { MapPinIcon, socialIcons } from "./icons";
 
+function formatStat(stat: { value: number; compact?: boolean; display?: string }) {
+  if (stat.display) return stat.display;
+  if (stat.compact && stat.value >= 1000) {
+    const k = stat.value / 1000;
+    return `${k >= 10 ? Math.round(k) : Math.round(k * 10) / 10}K`;
+  }
+  return stat.value.toLocaleString("en-US");
+}
+
 export function SocialLinks({
   age,
   profiles,
@@ -74,7 +83,7 @@ export function SocialLinks({
                   </div>
 
                   <p className="mt-3 line-clamp-2 text-[12px] leading-relaxed text-soft">
-                    {age !== null ? `${age} · ` : ""}
+                    {profile.showAge && age !== null ? `${age} · ` : ""}
                     {profile.bio}
                   </p>
 
@@ -88,7 +97,7 @@ export function SocialLinks({
                       {profile.stats.map((stat) => (
                         <span key={stat.label}>
                           <span className="font-medium text-fg tabular-nums">
-                            {stat.value.toLocaleString("en-US")}
+                            {formatStat(stat)}
                           </span>{" "}
                           <span className="text-muted">{stat.label}</span>
                         </span>

@@ -4,7 +4,14 @@ import { socialIcons } from "@/components/icons";
 
 type SocialIcon = keyof typeof socialIcons;
 
-export type ProfileStat = { value: number; label: string };
+export type ProfileStat = {
+  value: number;
+  label: string;
+  /** Compact the number, e.g. 3000 -> 3K. */
+  compact?: boolean;
+  /** Verbatim label when the platform itself rounds, e.g. "500+". */
+  display?: string;
+};
 
 export type SocialProfile = {
   key: string;
@@ -17,6 +24,7 @@ export type SocialProfile = {
   location: string;
   avatar: string;
   banner: string;
+  showAge: boolean;
   stats: ProfileStat[];
 };
 
@@ -120,6 +128,7 @@ export async function getSocialProfiles(): Promise<SocialProfile[]> {
       location: extra.location || social.location,
       avatar: social.avatar,
       banner: social.banner,
+      showAge: social.showAge,
       stats: extra.stats?.length ? extra.stats : social.stats,
     };
   });

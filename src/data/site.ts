@@ -32,6 +32,7 @@ export const site = {
       location: "Coimbatore, India",
       avatar: "/social/github-avatar.webp",
       banner: "/banner-poster.webp",
+      showAge: false,
       stats: [
         { value: 66, label: "Repositories" },
         { value: 28, label: "Followers" },
@@ -48,6 +49,7 @@ export const site = {
       location: "127.0.0.1",
       avatar: "/social/x-avatar.webp",
       banner: "/banner-poster.webp",
+      showAge: true,
       stats: [
         { value: 12, label: "Followers" },
         { value: 163, label: "Posts" },
@@ -60,11 +62,15 @@ export const site = {
       icon: "linkedin" as const,
       name: "Manoj Ganesan",
       handle: "in/manoj-ganesan-2444ab28a",
-      bio: "Final-year CSBS @ PSG Tech",
+      bio: "Software Engineer | Full Stack Developer | 0xEcho | Final Year @ PSG iTech",
       location: "Coimbatore, India",
       avatar: "/social/linkedin-avatar.webp",
       banner: "/banner-poster.webp",
-      stats: [],
+      showAge: false,
+      stats: [
+        { value: 3000, label: "Followers", compact: true },
+        { value: 500, label: "Connections", display: "500+" },
+      ],
     },
   ],
 };
