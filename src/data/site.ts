@@ -106,6 +106,20 @@ export const site = {
   ],
 };
 
+/**
+ * Discord has no public profile API, so this is a snapshot of the account shown
+ * in the profile popout. Clicking copies the username; swap `href` in once a
+ * profile link is available and the chip becomes a normal link.
+ */
+export const discord = {
+  name: "0xEcho",
+  handle: "0xechodev",
+  avatar: "/social/github-avatar.webp",
+  status: "Online",
+  quote: "Break it to understand it, then build it to last.",
+  href: null as string | null,
+};
+
 export const about = {
   intro: [
     "I'm a final-year Computer Science & Business Systems student at PSG Institute of Technology and Applied Research, Coimbatore. I build backend systems, security tooling, and AI agent infrastructure — the kind of software that has to keep working when the happy path ends.",

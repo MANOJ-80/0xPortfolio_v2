@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { homeAbout, homeTagline, site } from "@/data/site";
 import { Contributions } from "./contributions";
+import { DiscordChip } from "./discord-chip";
 import { HeroBanner } from "./hero-banner";
 import { ArrowUpRightIcon, MailIcon } from "./icons";
 import { getCurrentAge } from "@/lib/age";
@@ -104,7 +105,9 @@ export async function Hero() {
           Here are my <span className="font-medium text-fg">socials</span>
         </p>
 
-        <SocialLinks age={age} profiles={profiles} />
+        <SocialLinks age={age} profiles={profiles}>
+          <DiscordChip />
+        </SocialLinks>
       </div>
 
       <div className="rise mt-10 border-t border-dashed border-line pt-6" style={{ animationDelay: "300ms" }}>

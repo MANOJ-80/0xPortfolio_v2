@@ -14,9 +14,11 @@ function formatStat(stat: { value: number; compact?: boolean; display?: string }
 export function SocialLinks({
   age,
   profiles,
+  children,
 }: {
   age: number | null;
   profiles: SocialProfile[];
+  children?: React.ReactNode;
 }) {
   return (
     <div className="mt-3 flex flex-wrap gap-2">
@@ -113,6 +115,8 @@ export function SocialLinks({
           </div>
         );
       })}
+
+      {children}
     </div>
   );
 }
