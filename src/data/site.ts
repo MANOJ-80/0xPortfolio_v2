@@ -107,18 +107,22 @@ export const site = {
 };
 
 /**
- * Discord has no public profile API, so this is a snapshot of the account shown
- * in the profile popout. Clicking copies the username; swap `href` in once a
- * profile link is available and the chip becomes a normal link.
+ * Discord has no public profile API and profile URLs are keyed by the numeric
+ * user ID, not the username. Drop the ID in below and the chip becomes a real
+ * link to https://discord.com/users/<id>; until then clicking copies the handle.
  */
 export const discord = {
   name: "0xEcho",
   handle: "0xechodev",
+  id: null as string | null,
   avatar: "/social/github-avatar.webp",
   status: "Online",
   quote: "Break it to understand it, then build it to last.",
-  href: null as string | null,
 };
+
+export const discordProfileUrl = discord.id
+  ? `https://discord.com/users/${discord.id}`
+  : null;
 
 export const about = {
   intro: [

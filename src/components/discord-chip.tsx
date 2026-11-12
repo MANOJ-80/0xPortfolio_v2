@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { discord } from "@/data/site";
+import { discord, discordProfileUrl } from "@/data/site";
 import { DiscordIcon } from "./icons";
 
 /**
@@ -20,8 +20,8 @@ export function DiscordChip() {
   }, [copied]);
 
   async function handleClick() {
-    if (discord.href) {
-      window.open(discord.href, "_blank", "noopener,noreferrer");
+    if (discordProfileUrl) {
+      window.open(discordProfileUrl, "_blank", "noopener,noreferrer");
       return;
     }
 
@@ -39,9 +39,11 @@ export function DiscordChip() {
         type="button"
         onClick={handleClick}
         aria-label={
-          copied
-            ? "Discord username copied"
-            : `Copy Discord username ${discord.handle}`
+          discordProfileUrl
+            ? `Open ${discord.name} on Discord`
+            : copied
+              ? "Discord username copied"
+              : `Copy Discord username ${discord.handle}`
         }
         className="group inline-flex items-center gap-2 rounded-md border border-line bg-bg-soft px-3 py-2 text-[12px] text-soft transition-colors hover:border-accent/45 hover:text-fg"
       >
