@@ -3,58 +3,71 @@ import Link from "next/link";
 import { site } from "@/data/site";
 import { Contributions } from "./contributions";
 import { CopyEmail } from "./copy-email";
+import { HeroBanner } from "./hero-banner";
 import { ArrowUpRightIcon, DownloadIcon, socialIcons } from "./icons";
 import { LocalClock } from "./local-clock";
 
 export function Hero() {
   return (
-    <section className="pb-12 pt-10 sm:pb-14 sm:pt-14">
-      <div className="rise flex items-center gap-4">
-        <div className="relative size-16 shrink-0 overflow-hidden rounded-full border border-line bg-bg-soft">
-          <Image
-            src="/profile.webp"
-            alt={site.name}
-            fill
-            priority
-            sizes="56px"
-            className="object-cover"
-          />
+    <section className="pb-12">
+      <HeroBanner />
+
+      <div className="rise relative z-10 flex flex-wrap items-end justify-between gap-4">
+        <div className="flex items-start gap-4">
+          <div className="-mt-10 size-[84px] shrink-0 overflow-hidden rounded-xl border-[3px] border-bg bg-bg-soft shadow-[0_18px_40px_-24px_rgba(0,0,0,0.9)] sm:-mt-12 sm:size-24">
+            <Image
+              src="/profile.webp"
+              alt={site.name}
+              width={192}
+              height={192}
+              priority
+              className="size-full object-cover"
+            />
+          </div>
+
+          <div className="pt-4 sm:pt-5">
+            <h1 className="font-serif text-[clamp(1.9rem,4.8vw,2.75rem)] leading-none tracking-[-0.02em]">
+              Manoj Ganesan
+              <span className="text-accent">.</span>
+            </h1>
+            <p className="mt-2.5 flex flex-wrap items-center gap-x-2 gap-y-1 font-mono text-[10px] uppercase tracking-[0.18em] text-muted">
+              <span className="text-accent">~/0xecho</span>
+              <span className="hidden h-px w-4 bg-line sm:block" />
+              <span>Software Engineer</span>
+            </p>
+          </div>
         </div>
 
-        <div className="flex flex-col gap-1.5">
-          <div className="flex items-center gap-2">
+        <div className="hidden flex-col items-end gap-1.5 pb-1 sm:flex">
+          <span className="flex items-center gap-2">
             <span className="relative flex size-2">
               <span className="absolute inline-flex size-full animate-ping rounded-full bg-accent opacity-50" />
               <span className="relative inline-flex size-2 rounded-full bg-accent" />
             </span>
-            <span className="label text-soft">{site.availability}</span>
-          </div>
-          <p className="label">
+            <span className="label text-soft">Open to work</span>
+          </span>
+          <span className="label">
             {site.location} · <LocalClock timeZone={site.timeZone} /> IST
-          </p>
+          </span>
         </div>
       </div>
 
-      <h1
-        className="rise mt-9 font-serif text-[clamp(3.1rem,9.5vw,5.5rem)] leading-[0.92] tracking-[-0.025em]"
-        style={{ animationDelay: "60ms" }}
-      >
-        Manoj <span className="italic">Ganesan</span>
-        <span className="text-accent">.</span>
-      </h1>
-
-      <div
-        className="rise mt-4 flex flex-wrap items-center gap-x-3 gap-y-2 font-mono text-[10px] uppercase tracking-[0.2em] text-muted"
-        style={{ animationDelay: "120ms" }}
-      >
-        <span className="text-accent">~/0xecho</span>
-        <span className="hidden h-px w-8 bg-line sm:block" />
-        <span>Software Engineer</span>
+      <div className="mt-4 flex flex-col gap-1.5 sm:hidden">
+        <span className="flex items-center gap-2">
+          <span className="relative flex size-2">
+            <span className="absolute inline-flex size-full animate-ping rounded-full bg-accent opacity-50" />
+            <span className="relative inline-flex size-2 rounded-full bg-accent" />
+          </span>
+          <span className="label text-soft">Open to work</span>
+        </span>
+        <span className="label pl-4">
+          {site.location} · <LocalClock timeZone={site.timeZone} /> IST
+        </span>
       </div>
 
       <p
         className="rise mt-7 max-w-[56ch] text-[15px] leading-[1.8] text-soft"
-        style={{ animationDelay: "180ms" }}
+        style={{ animationDelay: "120ms" }}
       >
         I build secure backends, AI agent infrastructure and developer tools — the
         kind of software that keeps working when the happy path ends. Final-year CS
@@ -63,7 +76,7 @@ export function Hero() {
 
       <div
         className="rise mt-8 flex flex-wrap items-center gap-2.5"
-        style={{ animationDelay: "240ms" }}
+        style={{ animationDelay: "180ms" }}
       >
         <Link
           href="/work"
@@ -99,7 +112,7 @@ export function Hero() {
 
       <div
         className="rise mt-8 flex flex-wrap items-center gap-x-5 gap-y-2"
-        style={{ animationDelay: "300ms" }}
+        style={{ animationDelay: "240ms" }}
       >
         {site.socials.map((social) => {
           const Icon = socialIcons[social.icon];
@@ -118,7 +131,7 @@ export function Hero() {
         })}
       </div>
 
-      <div className="rise mt-10 border-t border-dashed border-line pt-6" style={{ animationDelay: "360ms" }}>
+      <div className="rise mt-10 border-t border-dashed border-line pt-6" style={{ animationDelay: "300ms" }}>
         <Contributions />
       </div>
     </section>

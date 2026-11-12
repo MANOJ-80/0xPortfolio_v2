@@ -124,6 +124,58 @@
   }
 }
 
+@keyframes kenburns {
+  0% {
+    transform: scale(1.02) translate3d(0, 0, 0);
+  }
+  100% {
+    transform: scale(1.12) translate3d(-1.2%, -1.5%, 0);
+  }
+}
+
+@keyframes drift {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 14px, 0);
+  }
+  15% {
+    opacity: var(--p-opacity, 0.7);
+  }
+  80% {
+    opacity: var(--p-opacity, 0.7);
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(var(--p-drift, 8px), -70px, 0);
+  }
+}
+
+@keyframes twinkle {
+  0%,
+  100% {
+    opacity: 0.18;
+  }
+  50% {
+    opacity: 0.65;
+  }
+}
+
+/* Film grain layer for the hero banner */
+.grain {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E");
+  mix-blend-mode: overlay;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .banner-media,
+  .banner-particles {
+    animation: none !important;
+  }
+  .banner-particles {
+    display: none;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -186,6 +238,11 @@
 .bleed {
   position: relative;
   border-top: 1px dashed var(--line);
+}
+
+/* Pull an element out to the dashed rails */
+.edge-x {
+  margin-inline: calc(var(--pad) * -1);
 }
 
 @media (min-width: 1024px) {

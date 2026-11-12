@@ -37,8 +37,16 @@ src/
 public/
   profile.webp               avatar
   resume.pdf                 linked from the header and hero
+  banner.mp4                 hero banner loop (16s palindrome)
+  banner-poster.webp         first-paint / reduced-motion frame
   work/*.webp                project preview images
 ```
+
+The hero banner footage is "Starry Night Sky Over Pine Forest" from
+[Coverr](https://coverr.co) — free to use, no attribution required. The source
+clip is a slow 8s pan; it is mirrored into a 16s palindrome so the loop is
+seamless, then scaled to 1440px at 20fps. To swap it, drop a new file at
+`public/banner.mp4` with a matching poster at `public/banner-poster.webp`.
 
 ## Editing content
 
