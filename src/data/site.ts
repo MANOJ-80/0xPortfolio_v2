@@ -61,7 +61,7 @@ export const site = {
       href: "https://www.linkedin.com/in/manoj-ganesan-2444ab28a/",
       icon: "linkedin" as const,
       name: "Manoj Ganesan",
-      handle: "in/manoj-ganesan-2444ab28a",
+      handle: "@in/manoj-ganesan-2444ab28a",
       bio: "Software Engineer | Full Stack Developer | 0xEcho | Final Year @ PSG iTech",
       location: "Coimbatore, India",
       avatar: "/social/linkedin-avatar.webp",
