@@ -5,13 +5,14 @@ import { Contributions } from "./contributions";
 import { HeroBanner } from "./hero-banner";
 import { ArrowUpRightIcon, MailIcon, socialIcons } from "./icons";
 import { LocalClock } from "./local-clock";
+import { ViewCount } from "./view-count";
 
 export function Hero() {
   return (
     <section className="pb-12">
       <HeroBanner />
 
-      <div className="rise mt-6 flex items-start justify-between gap-6">
+      <div className="rise mt-6 flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between sm:gap-6">
         <div className="flex items-start gap-4 sm:gap-5">
           <div className="relative size-20 shrink-0 overflow-hidden rounded-xl border border-line bg-bg-soft sm:size-24">
             <Image
@@ -40,21 +41,7 @@ export function Hero() {
           </div>
         </div>
 
-        <div className="hidden shrink-0 items-center gap-2 pt-1.5 sm:flex">
-          <span className="relative flex size-2">
-            <span className="absolute inline-flex size-full animate-ping rounded-full bg-accent opacity-50" />
-            <span className="relative inline-flex size-2 rounded-full bg-accent" />
-          </span>
-          <span className="label text-soft">Open to work</span>
-        </div>
-      </div>
-
-      <div className="mt-4 flex items-center gap-2 sm:hidden">
-        <span className="relative flex size-2">
-          <span className="absolute inline-flex size-full animate-ping rounded-full bg-accent opacity-50" />
-          <span className="relative inline-flex size-2 rounded-full bg-accent" />
-        </span>
-        <span className="label text-soft">Open to work</span>
+        <ViewCount className="self-end sm:self-start sm:pt-1.5" />
       </div>
 
       <div
