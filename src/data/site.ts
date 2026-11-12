@@ -34,6 +34,39 @@ export const about = {
     "I treat engineering the way I treat most things: as a series of experiments. Some work, some don't, all of them teach. What I care about is building with intent, understanding the system beneath the abstraction, and turning rough ideas into software that holds up.",
 };
 
+/** Short, scannable intro used under the hero identity block. */
+export const homeAbout: { parts: { text: string; strong?: boolean }[] }[] = [
+  {
+    parts: [
+      { text: "I'm a " },
+      { text: "software engineer", strong: true },
+      {
+        text: " focused on secure backends, security tooling, and AI agent infrastructure.",
+      },
+    ],
+  },
+  {
+    parts: [
+      { text: "I build with " },
+      { text: "Python, TypeScript, FastAPI and PostgreSQL", strong: true },
+      {
+        text: ", and I care about the parts of a system that have to hold when the happy path ends.",
+      },
+    ],
+  },
+  {
+    parts: [
+      { text: "Currently a " },
+      { text: "final-year CS student", strong: true },
+      {
+        text: " at PSG Institute of Technology, shipping multi-tenant EDR at Froze Communication and open source under the ",
+      },
+      { text: "0x", strong: true },
+      { text: " prefix." },
+    ],
+  },
+];
+
 export const education = {
   school: "PSG Institute of Technology and Applied Research",
   place: "Coimbatore, India",

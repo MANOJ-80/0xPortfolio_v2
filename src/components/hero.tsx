@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { site } from "@/data/site";
+import { homeAbout, site } from "@/data/site";
 import { Contributions } from "./contributions";
 import { CopyEmail } from "./copy-email";
 import { HeroBanner } from "./hero-banner";
@@ -65,14 +65,36 @@ export function Hero() {
         </span>
       </div>
 
-      <p
-        className="rise mt-7 max-w-[56ch] text-[15px] leading-[1.8] text-soft"
+      <div
+        className="rise mt-9 border-t border-dashed border-line pt-7"
         style={{ animationDelay: "120ms" }}
       >
-        I build secure backends, AI agent infrastructure and developer tools — the
-        kind of software that keeps working when the happy path ends. Final-year CS
-        student, most recently shipping multi-tenant EDR at Froze Communication.
-      </p>
+        <h2 className="font-serif text-[1.75rem] leading-none tracking-[-0.02em]">
+          About
+        </h2>
+
+        <ul className="mt-5 flex max-w-[68ch] flex-col gap-3.5">
+          {homeAbout.map((point, i) => (
+            <li
+              key={i}
+              className="flex gap-3 text-[14.5px] leading-[1.75] text-soft"
+            >
+              <span className="mt-[10px] size-[3px] shrink-0 rounded-full bg-accent/80" />
+              <span>
+                {point.parts.map((part, j) =>
+                  part.strong ? (
+                    <strong key={j} className="font-medium text-fg">
+                      {part.text}
+                    </strong>
+                  ) : (
+                    <span key={j}>{part.text}</span>
+                  ),
+                )}
+              </span>
+            </li>
+          ))}
+        </ul>
+      </div>
 
       <div
         className="rise mt-8 flex flex-wrap items-center gap-2.5"
