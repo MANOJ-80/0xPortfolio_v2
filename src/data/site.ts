@@ -114,7 +114,7 @@ export const site = {
 export const discord = {
   name: "0xEcho",
   handle: "0xechodev",
-  id: null as string | null,
+  id: "1570423379431792710",
   avatar: "/social/github-avatar.webp",
   status: "Online",
   quote: "Break it to understand it, then build it to last.",
