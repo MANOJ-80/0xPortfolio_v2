@@ -5,15 +5,15 @@ import { Contributions } from "./contributions";
 import { HeroBanner } from "./hero-banner";
 import { ArrowUpRightIcon, MailIcon } from "./icons";
 import { getCurrentAge } from "@/lib/age";
-import { getGitHubStats } from "@/lib/github";
+import { getSocialProfiles } from "@/lib/profiles";
 import { RoleRotator } from "./role-rotator";
 import { SocialLinks } from "./social-links";
 import { ViewCount } from "./view-count";
 
 export async function Hero() {
-  const [age, githubStats] = await Promise.all([
+  const [age, profiles] = await Promise.all([
     getCurrentAge(),
-    getGitHubStats(),
+    getSocialProfiles(),
   ]);
 
   return (
@@ -104,7 +104,7 @@ export async function Hero() {
           Here are my <span className="font-medium text-fg">socials</span>
         </p>
 
-        <SocialLinks age={age} stats={githubStats} />
+        <SocialLinks age={age} profiles={profiles} />
       </div>
 
       <div className="rise mt-10 border-t border-dashed border-line pt-6" style={{ animationDelay: "300ms" }}>

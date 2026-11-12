@@ -1,25 +1,24 @@
 import Image from "next/image";
-import { site } from "@/data/site";
-import type { GitHubStats } from "@/lib/github";
+import type { SocialProfile } from "@/lib/profiles";
 import { MapPinIcon, socialIcons } from "./icons";
 
 export function SocialLinks({
   age,
-  stats,
+  profiles,
 }: {
   age: number | null;
-  stats: GitHubStats | null;
+  profiles: SocialProfile[];
 }) {
   return (
     <div className="mt-3 flex flex-wrap gap-2">
-      {site.socials.map((social, index) => {
-        const Icon = socialIcons[social.icon];
-        const alignRight = index === site.socials.length - 1;
+      {profiles.map((profile, index) => {
+        const Icon = socialIcons[profile.icon];
+        const alignRight = index === profiles.length - 1;
 
         return (
-          <div key={social.label} className="group/social relative">
+          <div key={profile.key} className="group/social relative">
             <a
-              href={social.href}
+              href={profile.href}
               target="_blank"
               rel="noopener noreferrer"
               className="group inline-flex items-center gap-2 rounded-md border border-line bg-bg-soft px-3 py-2 text-[12px] text-soft transition-colors hover:border-accent/45 hover:text-fg"
@@ -28,7 +27,7 @@ export function SocialLinks({
                 size={14}
                 className="text-muted transition-colors group-hover:text-accent"
               />
-              {social.label}
+              {profile.label}
             </a>
 
             <div
@@ -38,60 +37,62 @@ export function SocialLinks({
               aria-hidden
             >
               <div className="w-[304px] translate-y-1 overflow-hidden rounded-xl border border-line bg-bg-elev shadow-[0_32px_70px_-28px_rgba(0,0,0,0.95)] transition-transform duration-200 group-hover/social:translate-y-0 group-focus-within/social:translate-y-0">
-                <div className="relative h-[76px]">
+                <div className="relative h-[80px]">
                   <Image
-                    src="/banner-poster.webp"
+                    src={profile.banner}
                     alt=""
                     fill
                     sizes="304px"
                     className="object-cover object-center"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-bg-elev via-bg-elev/25 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-bg-elev via-bg-elev/25 to-transparent" />
+                  <span className="absolute right-3 top-3 grid size-6 place-items-center rounded-md border border-line/80 bg-bg/70 text-soft backdrop-blur-sm">
+                    <Icon size={12} />
+                  </span>
                 </div>
 
                 <div className="relative z-10 px-4 pb-4">
                   <div className="-mt-6 flex items-end gap-3">
                     <div className="relative size-12 shrink-0 overflow-hidden rounded-full border-2 border-bg-elev bg-bg-soft ring-1 ring-line">
                       <Image
-                        src="/profile.webp"
+                        src={profile.avatar}
                         alt=""
                         fill
                         sizes="48px"
                         className="object-cover"
                       />
                     </div>
-                    <div className="pb-1">
-                      <p className="text-[14px] font-medium leading-tight text-fg">
-                        {site.name}
+                    <div className="min-w-0 pb-1">
+                      <p className="truncate text-[14px] font-medium leading-tight text-fg">
+                        {profile.name}
                       </p>
-                      <p className="mt-0.5 text-[11px] leading-none text-muted">
-                        {social.handle}
+                      <p className="mt-0.5 truncate text-[11px] leading-none text-muted">
+                        {profile.handle}
                       </p>
                     </div>
                   </div>
 
-                  <p className="mt-3 text-[12px] leading-relaxed text-soft">
+                  <p className="mt-3 line-clamp-2 text-[12px] leading-relaxed text-soft">
                     {age !== null ? `${age} · ` : ""}
-                    {social.meta}
+                    {profile.bio}
                   </p>
 
                   <p className="mt-2 flex items-center gap-1.5 text-[11px] leading-none text-muted">
                     <MapPinIcon size={12} className="shrink-0" />
-                    {social.location}
+                    {profile.location}
                   </p>
 
-                  {social.stats === "github" && stats && (
+                  {profile.stats.length > 0 && (
                     <div className="mt-3 flex items-center gap-4 border-t border-line pt-3 text-[11px]">
-                      <span>
-                        <span className="font-medium text-fg">{stats.repos}</span>{" "}
-                        <span className="text-muted">Repositories</span>
-                      </span>
-                      <span>
-                        <span className="font-medium text-fg">
-                          {stats.followers}
-                        </span>{" "}
-                        <span className="text-muted">Followers</span>
-                      </span>
+                      {profile.stats.map((stat) => (
+                        <span key={stat.label}>
+                          <span className="font-medium text-fg tabular-nums">
+                            {stat.value.toLocaleString("en-US")}
+                          </span>{" "}
+                          <span className="text-muted">{stat.label}</span>
+                        </span>
+                      ))}
                     </div>
                   )}
                 </div>
