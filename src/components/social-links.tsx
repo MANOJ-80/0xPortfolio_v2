@@ -23,13 +23,16 @@ export function SocialLinks({
       {profiles.map((profile, index) => {
         const Icon = socialIcons[profile.icon];
         const alignRight = index === profiles.length - 1;
+        const newTab =
+          profile.href.startsWith("http") || profile.href.endsWith(".pdf");
 
         return (
           <div key={profile.key} className="group/social relative">
             <a
               href={profile.href}
-              target="_blank"
-              rel="noopener noreferrer"
+              {...(newTab
+                ? { target: "_blank", rel: "noopener noreferrer" }
+                : {})}
               className="group inline-flex items-center gap-2 rounded-md border border-line bg-bg-soft px-3 py-2 text-[12px] text-soft transition-colors hover:border-accent/45 hover:text-fg"
             >
               <Icon
