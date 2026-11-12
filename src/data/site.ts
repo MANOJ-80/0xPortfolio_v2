@@ -35,34 +35,31 @@ export const about = {
 };
 
 /** Short, scannable intro used under the hero identity block. */
+export const homeTagline =
+  "Engineer / builder. I like making systems that hold up when the happy path ends.";
+
 export const homeAbout: { parts: { text: string; strong?: boolean }[] }[] = [
   {
     parts: [
-      { text: "I'm a " },
-      { text: "software engineer", strong: true },
       {
-        text: " focused on secure backends, security tooling, and AI agent infrastructure.",
+        text: "AI agents, open source, and security tooling are what I spend most of my time on.",
       },
     ],
   },
   {
     parts: [
-      { text: "I build with " },
-      { text: "Python, TypeScript, FastAPI and PostgreSQL", strong: true },
       {
-        text: ", and I care about the parts of a system that have to hold when the happy path ends.",
+        text: "I think the interesting part of engineering starts after the happy path, so I build for failure first.",
       },
     ],
   },
   {
     parts: [
-      { text: "Currently a " },
-      { text: "final-year CS student", strong: true },
-      {
-        text: " at PSG Institute of Technology, shipping multi-tenant EDR at Froze Communication and open source under the ",
-      },
-      { text: "0x", strong: true },
-      { text: " prefix." },
+      { text: "Currently building " },
+      { text: "0xNexigent", strong: true },
+      { text: ", " },
+      { text: "0xMemory", strong: true },
+      { text: ", and multi-tenant EDR at Froze Communication." },
     ],
   },
 ];
