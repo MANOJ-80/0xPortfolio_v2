@@ -3,13 +3,18 @@ import Link from "next/link";
 import { homeAbout, homeTagline, site } from "@/data/site";
 import { Contributions } from "./contributions";
 import { HeroBanner } from "./hero-banner";
-import { ArrowUpRightIcon, MailIcon, socialIcons } from "./icons";
+import { ArrowUpRightIcon, MailIcon } from "./icons";
 import { getCurrentAge } from "@/lib/age";
+import { getGitHubStats } from "@/lib/github";
 import { RoleRotator } from "./role-rotator";
+import { SocialLinks } from "./social-links";
 import { ViewCount } from "./view-count";
 
 export async function Hero() {
-  const age = await getCurrentAge();
+  const [age, githubStats] = await Promise.all([
+    getCurrentAge(),
+    getGitHubStats(),
+  ]);
 
   return (
     <section className="pb-12">
@@ -99,23 +104,7 @@ export async function Hero() {
           Here are my <span className="font-medium text-fg">socials</span>
         </p>
 
-        <div className="mt-3 flex flex-wrap gap-2">
-          {site.socials.map((social) => {
-            const Icon = socialIcons[social.icon];
-            return (
-              <a
-                key={social.label}
-                href={social.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group inline-flex items-center gap-2 rounded-md border border-line bg-bg-soft px-3 py-2 text-[12px] text-soft transition-colors hover:border-accent/45 hover:text-fg"
-              >
-                <Icon size={14} className="text-muted transition-colors group-hover:text-accent" />
-                {social.label}
-              </a>
-            );
-          })}
-        </div>
+        <SocialLinks age={age} stats={githubStats} />
       </div>
 
       <div className="rise mt-10 border-t border-dashed border-line pt-6" style={{ animationDelay: "300ms" }}>
