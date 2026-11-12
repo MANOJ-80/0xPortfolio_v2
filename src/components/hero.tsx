@@ -11,87 +11,81 @@ export function Hero() {
     <section className="pb-12">
       <HeroBanner />
 
-      <div className="rise relative z-10 flex flex-wrap items-end justify-between gap-4">
-        <div className="flex items-start gap-4">
-          <div className="-mt-10 size-[84px] shrink-0 overflow-hidden rounded-xl border-[3px] border-bg bg-bg-soft shadow-[0_18px_40px_-24px_rgba(0,0,0,0.9)] sm:-mt-12 sm:size-24">
+      <div className="rise mt-6 flex items-start justify-between gap-6">
+        <div className="flex items-start gap-4 sm:gap-5">
+          <div className="relative size-20 shrink-0 overflow-hidden rounded-xl border border-line bg-bg-soft sm:size-24">
             <Image
               src="/profile.webp"
               alt={site.name}
-              width={192}
-              height={192}
+              fill
               priority
-              className="size-full object-cover"
+              sizes="96px"
+              className="object-cover"
             />
           </div>
 
-          <div className="pt-4 sm:pt-5">
-            <h1 className="font-serif text-[clamp(1.9rem,4.8vw,2.75rem)] leading-none tracking-[-0.02em]">
+          <div className="min-w-0 pt-1">
+            <h1 className="font-serif text-[clamp(1.9rem,4.6vw,2.6rem)] leading-[1.02] tracking-[-0.02em]">
               Manoj Ganesan
               <span className="text-accent">.</span>
             </h1>
-            <p className="mt-2.5 flex flex-wrap items-center gap-x-2 gap-y-1 font-mono text-[10px] uppercase tracking-[0.18em] text-muted">
+            <p className="mt-2 flex flex-wrap items-center gap-x-2 gap-y-1 font-mono text-[10px] uppercase tracking-[0.18em] text-muted">
               <span className="text-accent">~/0xecho</span>
-              <span className="hidden h-px w-4 bg-line sm:block" />
+              <span className="hidden h-px w-4 bg-line sm:inline-block" />
               <span>Software Engineer</span>
+            </p>
+            <p className="mt-2 font-mono text-[10px] uppercase tracking-[0.14em] text-muted">
+              {site.location} · <LocalClock timeZone={site.timeZone} /> IST
             </p>
           </div>
         </div>
 
-        <div className="hidden flex-col items-end gap-1.5 pb-1 sm:flex">
-          <span className="flex items-center gap-2">
-            <span className="relative flex size-2">
-              <span className="absolute inline-flex size-full animate-ping rounded-full bg-accent opacity-50" />
-              <span className="relative inline-flex size-2 rounded-full bg-accent" />
-            </span>
-            <span className="label text-soft">Open to work</span>
-          </span>
-          <span className="label">
-            {site.location} · <LocalClock timeZone={site.timeZone} /> IST
-          </span>
-        </div>
-      </div>
-
-      <div className="mt-4 flex flex-col gap-1.5 sm:hidden">
-        <span className="flex items-center gap-2">
+        <div className="hidden shrink-0 items-center gap-2 pt-1.5 sm:flex">
           <span className="relative flex size-2">
             <span className="absolute inline-flex size-full animate-ping rounded-full bg-accent opacity-50" />
             <span className="relative inline-flex size-2 rounded-full bg-accent" />
           </span>
           <span className="label text-soft">Open to work</span>
-        </span>
-        <span className="label pl-4">
-          {site.location} · <LocalClock timeZone={site.timeZone} /> IST
-        </span>
+        </div>
       </div>
 
-      <p
-        className="rise mt-7 text-[15px] leading-[1.75] text-soft"
+      <div className="mt-4 flex items-center gap-2 sm:hidden">
+        <span className="relative flex size-2">
+          <span className="absolute inline-flex size-full animate-ping rounded-full bg-accent opacity-50" />
+          <span className="relative inline-flex size-2 rounded-full bg-accent" />
+        </span>
+        <span className="label text-soft">Open to work</span>
+      </div>
+
+      <div
+        className="rise mt-10 border-t border-dashed border-line pt-8"
         style={{ animationDelay: "120ms" }}
       >
-        {homeTagline}
-      </p>
+        <h2 className="font-serif text-[1.9rem] leading-none tracking-[-0.02em]">
+          About
+        </h2>
 
-      <ul
-        className="rise mt-5 flex max-w-[68ch] flex-col gap-3.5"
-        style={{ animationDelay: "150ms" }}
-      >
-        {homeAbout.map((point, i) => (
-          <li key={i} className="flex gap-3 text-[14.5px] leading-[1.75] text-soft">
-            <span className="mt-[10px] size-[3px] shrink-0 rounded-full bg-accent/80" />
-            <span>
-              {point.parts.map((part, j) =>
-                part.strong ? (
-                  <strong key={j} className="font-medium text-fg">
-                    {part.text}
-                  </strong>
-                ) : (
-                  <span key={j}>{part.text}</span>
-                ),
-              )}
-            </span>
-          </li>
-        ))}
-      </ul>
+        <p className="mt-4 text-[15px] leading-[1.75] text-soft">{homeTagline}</p>
+
+        <ul className="mt-5 flex max-w-[68ch] flex-col gap-3.5">
+          {homeAbout.map((point, i) => (
+            <li key={i} className="flex gap-3 text-[14.5px] leading-[1.75] text-soft">
+              <span className="mt-[10px] size-[3px] shrink-0 rounded-full bg-accent/80" />
+              <span>
+                {point.parts.map((part, j) =>
+                  part.strong ? (
+                    <strong key={j} className="font-medium text-fg">
+                      {part.text}
+                    </strong>
+                  ) : (
+                    <span key={j}>{part.text}</span>
+                  ),
+                )}
+              </span>
+            </li>
+          ))}
+        </ul>
+      </div>
 
       <div
         className="rise mt-7 flex flex-wrap items-center gap-2"

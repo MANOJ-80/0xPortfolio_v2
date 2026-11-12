@@ -14,7 +14,7 @@ const BANNER_POSTER = "/banner-poster.webp";
 
 export function HeroBanner() {
   return (
-    <div className="edge-x relative h-[190px] overflow-hidden border-b border-line bg-[#05070c] sm:h-[280px] lg:h-[340px]">
+    <div className="relative h-[190px] overflow-hidden bg-[#05070c] sm:h-[280px] lg:h-[340px]">
       <div className="absolute inset-0">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
@@ -46,7 +46,7 @@ export function HeroBanner() {
 
       <div className="pointer-events-none absolute inset-0 grain opacity-[0.12]" />
 
-      <div className="absolute inset-x-0 bottom-0 hidden items-end justify-between gap-4 px-5 pb-3 pl-32 sm:flex">
+      <div className="absolute inset-x-0 bottom-0 hidden items-end justify-between gap-4 px-5 pb-3 sm:flex">
         <p className="font-mono text-[9px] uppercase tracking-[0.22em] text-white/40">
           11.0168°N&nbsp;&nbsp;76.9558°E
         </p>
