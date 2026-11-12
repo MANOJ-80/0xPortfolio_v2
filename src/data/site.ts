@@ -18,6 +18,7 @@ export const site = {
   github: "MANOJ-80",
   resume: "/resume.pdf",
   year: 2026,
+  dob: "2005-10-27",
   availability: "Open to full-time roles & freelance work",
   socials: [
     { label: "GitHub", href: "https://github.com/MANOJ-80", icon: "github" as const },

@@ -4,10 +4,13 @@ import { homeAbout, homeTagline, site } from "@/data/site";
 import { Contributions } from "./contributions";
 import { HeroBanner } from "./hero-banner";
 import { ArrowUpRightIcon, MailIcon, socialIcons } from "./icons";
+import { getCurrentAge } from "@/lib/age";
 import { RoleRotator } from "./role-rotator";
 import { ViewCount } from "./view-count";
 
-export function Hero() {
+export async function Hero() {
+  const age = await getCurrentAge();
+
   return (
     <section className="pb-12">
       <HeroBanner />
@@ -31,6 +34,7 @@ export function Hero() {
             </h1>
             <RoleRotator roles={site.roles} className="mt-2.5" />
             <p className="mt-2.5 text-[11px] leading-none text-muted">
+              {age !== null ? `${age}, ` : ""}
               {site.location}
             </p>
           </div>
