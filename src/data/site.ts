@@ -2,6 +2,12 @@ export const site = {
   name: "Manoj Ganesan",
   handle: "0xEcho",
   role: "Software Engineer",
+  roles: [
+    "Indie hacker",
+    "Security researcher",
+    "Software engineer",
+    "Full stack engineer",
+  ],
   headline: "Backend systems, security tooling, AI agents.",
   description:
     "Manoj Ganesan (0xEcho) is a software engineer from India building secure backends, AI agent infrastructure and developer tools.",

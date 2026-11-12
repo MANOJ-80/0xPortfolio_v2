@@ -4,7 +4,7 @@ import { homeAbout, homeTagline, site } from "@/data/site";
 import { Contributions } from "./contributions";
 import { HeroBanner } from "./hero-banner";
 import { ArrowUpRightIcon, MailIcon, socialIcons } from "./icons";
-import { LocalClock } from "./local-clock";
+import { RoleRotator } from "./role-rotator";
 import { ViewCount } from "./view-count";
 
 export function Hero() {
@@ -26,17 +26,12 @@ export function Hero() {
           </div>
 
           <div className="min-w-0 pt-1">
-            <h1 className="font-serif text-[clamp(1.9rem,4.6vw,2.6rem)] leading-[1.02] tracking-[-0.02em]">
+            <h1 className="font-serif text-[clamp(2rem,4.8vw,2.9rem)] leading-[1.02] tracking-[-0.025em]">
               Manoj Ganesan
-              <span className="text-accent">.</span>
             </h1>
-            <p className="mt-2 flex flex-wrap items-center gap-x-2 gap-y-1 font-mono text-[10px] uppercase tracking-[0.18em] text-muted">
-              <span className="text-accent">~/0xecho</span>
-              <span className="hidden h-px w-4 bg-line sm:inline-block" />
-              <span>Software Engineer</span>
-            </p>
-            <p className="mt-2 font-mono text-[10px] uppercase tracking-[0.14em] text-muted">
-              {site.location} · <LocalClock timeZone={site.timeZone} /> IST
+            <RoleRotator roles={site.roles} className="mt-2.5" />
+            <p className="mt-2.5 text-[11px] leading-none text-muted">
+              {site.location}
             </p>
           </div>
         </div>
