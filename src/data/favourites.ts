@@ -62,6 +62,7 @@ export const favouriteSections = [
       {
         "title": "The Matrix",
         "image": "/favourites/posters/the-matrix.webp",
+        "status": "Wishlist",
         "credit": "Lana Wachowski, Lilly Wachowski",
         "description": "A computer hacker discovers that his life is nothing more than an elaborate simulation run by an evil AI.",
         "year": "1999"
@@ -166,6 +167,7 @@ export const favouriteSections = [
       {
         "title": "Breaking Bad",
         "image": "/favourites/posters/breaking-bad.webp",
+        "status": "Wishlist",
         "credit": "Vince Gilligan",
         "description": "A chemistry teacher diagnosed with inoperable lung cancer turns to manufacturing and selling methamphetamine with a former student to secure his family's future.",
         "year": "2008–2013"
@@ -173,6 +175,7 @@ export const favouriteSections = [
       {
         "title": "Game of Thrones",
         "image": "/favourites/posters/game-of-thrones.webp",
+        "status": "Wishlist",
         "credit": "David Benioff, D.B. Weiss",
         "description": "Nine noble families vie for control of Westeros and the Iron Throne, while an ancient threat beyond The Wall begins to stir.",
         "year": "2011–2019"
@@ -194,6 +197,7 @@ export const favouriteSections = [
       {
         "title": "Stranger Things",
         "image": "/favourites/posters/stranger-things.webp",
+        "status": "Wishlist",
         "credit": "Matt Duffer, Ross Duffer",
         "description": "In 1980s Indiana, a group of young friends witness supernatural forces and secret government exploits. As they search for answers, the children unravel a series of extraordinary mysteries.",
         "year": "2016–2025"
@@ -201,6 +205,7 @@ export const favouriteSections = [
       {
         "title": "The Boys",
         "image": "/favourites/posters/the-boys.webp",
+        "status": "Wishlist",
         "credit": "Eric Kripke",
         "description": "A group of vigilantes set out to take down corrupt superheroes who abuse their superpowers.",
         "year": "2019–2026"
@@ -300,6 +305,7 @@ export const favouriteSections = [
       {
         "title": "Bleach",
         "image": "/favourites/posters/bleach.webp",
+        "status": "Wishlist",
         "credit": "Including Thousand-Year Blood War",
         "description": "The peace is suddenly broken when warning sirens blare through the Soul Society. Residents are disappearing without a trace and nobody knows who's behind it. Meanwhile, a darkness is approaching Ichigo and his friends in Karakura ...",
         "year": "2022–"
@@ -307,6 +313,7 @@ export const favouriteSections = [
       {
         "title": "Vinland Saga",
         "image": "/favourites/posters/vinland-saga.webp",
+        "status": "Wishlist",
         "credit": "Makoto Yukimura",
         "description": "Following a tragedy, Thorfinn embarks on a journey with the man responsible for it to take his life in a duel as a true and honorable warrior.",
         "year": "2019–2023"
@@ -321,6 +328,7 @@ export const favouriteSections = [
       {
         "title": "Black Clover",
         "image": "/favourites/posters/black-clover.webp",
+        "status": "Wishlist",
         "credit": "Yūki Tabata",
         "description": "Asta and Yuno were abandoned together at the same church and have been inseparable since. As children, they promised that they would compete against each other to see who would become the next Emperor Magus.",
         "year": "2017–2026"

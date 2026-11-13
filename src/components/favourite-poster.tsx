@@ -5,6 +5,7 @@ export type FavouritePosterData = {
   image: string;
   credit?: string;
   description?: string;
+  status?: "Wishlist";
 };
 
 export function FavouritePoster({ item }: { item: FavouritePosterData }) {
@@ -21,6 +22,10 @@ export function FavouritePoster({ item }: { item: FavouritePosterData }) {
         sizes="(max-width: 639px) 42vw, 192px"
         className="object-cover"
       />
+
+      <span className="pointer-events-none absolute left-2 top-2 z-20 rounded-full border border-white/15 bg-black/65 px-2 py-1 font-mono text-[8px] uppercase tracking-[0.12em] text-white/90 backdrop-blur-sm">
+        {item.status ?? "Watched"}
+      </span>
 
       <div className="pointer-events-none absolute inset-0 z-10 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-focus-visible:opacity-100" />
 

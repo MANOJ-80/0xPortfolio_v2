@@ -73,7 +73,18 @@ export default function FavouritesPage() {
               <h2 className="text-xs font-semibold tracking-[0.08em] text-muted">
                 {shelf.title}
               </h2>
+              {shelf.id === "books" && (
+                <span className="ml-auto font-mono text-[9px] uppercase tracking-[0.14em] text-muted/70">
+                  Wishlist
+                </span>
+              )}
             </div>
+
+            {shelf.id === "books" && (
+              <p className="mb-6 -mt-2 text-[12px] leading-relaxed text-muted">
+                I haven’t read these yet; they’re on my reading wishlist.
+              </p>
+            )}
 
             <div className="grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 sm:gap-x-5 sm:gap-y-10">
               {shelf.items.map((item) => (
