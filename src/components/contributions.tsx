@@ -1,9 +1,8 @@
-import { buildWeeks, getContributions, formatRange } from "@/lib/contributions";
+import { buildWeeks, getContributions } from "@/lib/contributions";
 import { site } from "@/data/site";
-import { ArrowUpRightIcon } from "./icons";
 
 const levelClass = [
-  "bg-line-soft",
+  "bg-line",
   "bg-accent/25",
   "bg-accent/45",
   "bg-accent/70",
@@ -33,14 +32,6 @@ export async function Contributions() {
 
   return (
     <div>
-      <div className="mb-3 flex items-end justify-between gap-4">
-        <p className="font-mono text-[11px] text-soft">
-          <span className="text-fg">{data.total.toLocaleString("en-US")}</span> contributions
-          <span className="text-muted"> in the last year</span>
-        </p>
-        <p className="label hidden sm:block">{formatRange(data.days)}</p>
-      </div>
-
       <div className="-mx-1 overflow-x-auto px-1 pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
         <div className="sm:min-w-0">
           <div
@@ -84,15 +75,11 @@ export async function Contributions() {
         </div>
       </div>
 
-      <div className="mt-3 flex items-center justify-between">
-        <a
-          href={`https://github.com/${site.github}`}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="label inline-flex items-center gap-1 transition-colors hover:text-accent"
-        >
-          @{site.github} <ArrowUpRightIcon size={11} />
-        </a>
+      <div className="mt-3.5 flex items-center justify-between gap-4">
+        <p className="text-[12.5px] text-soft">
+          <span className="text-fg">{data.total.toLocaleString("en-US")}</span>{" "}
+          contributions <span className="text-muted">in the last year</span>
+        </p>
         <div className="flex items-center gap-2">
           <span className="label">Less</span>
           <div className="flex gap-[3px]">

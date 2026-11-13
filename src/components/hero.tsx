@@ -110,8 +110,27 @@ export async function Hero() {
         </SocialLinks>
       </div>
 
-      <div className="rise mt-10 border-t border-dashed border-line pt-6" style={{ animationDelay: "300ms" }}>
-        <Contributions />
+      <div
+        className="rise mt-12 border-t border-dashed border-line pt-8"
+        style={{ animationDelay: "300ms" }}
+      >
+        <div className="flex items-baseline justify-between gap-4">
+          <h2 className="font-serif text-[1.9rem] leading-none tracking-[-0.02em]">
+            GitHub Activity
+          </h2>
+          <a
+            href={`https://github.com/${site.github}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="label inline-flex items-center gap-1 transition-colors hover:text-accent"
+          >
+            @{site.github} <ArrowUpRightIcon size={11} />
+          </a>
+        </div>
+
+        <div className="mt-6">
+          <Contributions />
+        </div>
       </div>
     </section>
   );
