@@ -113,30 +113,26 @@ export const about = {
 
 /** Short, scannable intro used under the hero identity block. */
 export const homeTagline =
-  "Engineer / builder. I like making systems that hold up when the happy path ends.";
+  "Engineer / builder.";
 
 export const homeAbout: { parts: { text: string; strong?: boolean }[] }[] = [
   {
     parts: [
       {
-        text: "AI agents, open source, and security tooling are what I spend most of my time on.",
+        text: "I build software for the moments when things don’t go as planned.",
       },
     ],
   },
   {
     parts: [
       {
-        text: "I think the interesting part of engineering starts after the happy path, so I build for failure first.",
+        text: "I care about edge cases: dropped events, lost context, and systems under pressure.",
       },
     ],
   },
   {
     parts: [
-      { text: "Currently building " },
-      { text: "0xNexigent", strong: true },
-      { text: ", " },
-      { text: "0xMemory", strong: true },
-      { text: ", and multi-tenant EDR at Froze Communication." },
+      { text: "I build across AI tools, security systems, and web applications." },
     ],
   },
 ];
