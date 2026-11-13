@@ -29,7 +29,15 @@ type Engine = {
   ctx: AudioContext;
   master: GainNode;
   reverb: ConvolverNode;
+  keyboardSprite: AudioBuffer | null;
+  keyboardSpriteLoad: Promise<AudioBuffer | null> | null;
 };
+
+export type TechSoundMode = "piano" | "keyboard";
+
+const KEY_SAMPLE_COUNT = 16;
+const KEY_SAMPLE_STRIDE = 0.12;
+const KEY_SAMPLE_DURATION = 0.095;
 
 type AudioContextConstructor = typeof AudioContext;
 
@@ -46,6 +54,39 @@ function impulseResponse(ctx: AudioContext, seconds: number, decay: number) {
   }
 
   return buffer;
+}
+
+function loadKeyboardSprite(engine: Engine) {
+  if (engine.keyboardSprite) return Promise.resolve(engine.keyboardSprite);
+  if (engine.keyboardSpriteLoad) return engine.keyboardSpriteLoad;
+
+  engine.keyboardSpriteLoad = fetch("/sounds/keyboard-click-sprite.wav")
+    .then((response) => {
+      if (!response.ok) throw new Error("Keyboard sound samples could not be loaded");
+      return response.arrayBuffer();
+    })
+    .then((data) => engine.ctx.decodeAudioData(data))
+    .then((buffer) => {
+      engine.keyboardSprite = buffer;
+      return buffer;
+    })
+    .catch(() => null);
+
+  return engine.keyboardSpriteLoad;
+}
+
+function keyboardClick(engine: Engine, buffer: AudioBuffer, index: number, when: number, kind: "hover" | "click") {
+  const { ctx, master } = engine;
+  // Reorder the recorded presses so adjacent chips don't all repeat the same timbre.
+  const sampleIndex = (index * 7 + (kind === "click" ? 5 : 0)) % KEY_SAMPLE_COUNT;
+  const source = ctx.createBufferSource();
+  source.buffer = buffer;
+
+  const envelope = ctx.createGain();
+  envelope.gain.setValueAtTime(kind === "click" ? 0.76 : 0.58, when);
+  source.connect(envelope);
+  envelope.connect(master);
+  source.start(when, sampleIndex * KEY_SAMPLE_STRIDE, KEY_SAMPLE_DURATION);
 }
 
 function voice(
@@ -97,7 +138,7 @@ function voice(
   shine.stop(when + duration);
 }
 
-export function useTechAudio(enabled: boolean) {
+export function useTechAudio(enabled: boolean, mode: TechSoundMode) {
   const engineRef = useRef<Engine | null>(null);
   const lastPlayed = useRef(0);
 
@@ -130,7 +171,13 @@ export function useTechAudio(enabled: boolean) {
     reverb.connect(wet);
     wet.connect(master);
 
-    const engine = { ctx, master, reverb };
+    const engine: Engine = {
+      ctx,
+      master,
+      reverb,
+      keyboardSprite: null,
+      keyboardSpriteLoad: null,
+    };
     engineRef.current = engine;
 
     if (ctx.state === "suspended") void ctx.resume();
@@ -148,8 +195,18 @@ export function useTechAudio(enabled: boolean) {
       const engine = ensureEngine();
       if (!engine) return;
 
-      const { frequency } = getNote(index);
       const t = engine.ctx.currentTime + 0.012;
+
+      if (mode === "keyboard") {
+        const playSample = (buffer: AudioBuffer | null) => {
+          if (buffer && engine.ctx.state !== "closed") keyboardClick(engine, buffer, index, t, kind);
+        };
+        if (engine.keyboardSprite) playSample(engine.keyboardSprite);
+        else void loadKeyboardSprite(engine).then(playSample);
+        return;
+      }
+
+      const { frequency } = getNote(index);
 
       if (kind === "click") {
         voice(engine, frequency, t, 0.85, 0.05);
@@ -159,14 +216,17 @@ export function useTechAudio(enabled: boolean) {
         voice(engine, frequency, t, 0.55, 0.046);
       }
     },
-    [enabled, ensureEngine],
+    [enabled, ensureEngine, mode],
   );
 
   /* Browsers only allow audio after a gesture, so prime on the first one. */
   useEffect(() => {
     if (!enabled) return;
 
-    const prime = () => ensureEngine();
+    const prime = () => {
+      const engine = ensureEngine();
+      if (mode === "keyboard" && engine) void loadKeyboardSprite(engine);
+    };
     window.addEventListener("pointerdown", prime, { passive: true });
     window.addEventListener("keydown", prime);
 
@@ -174,7 +234,7 @@ export function useTechAudio(enabled: boolean) {
       window.removeEventListener("pointerdown", prime);
       window.removeEventListener("keydown", prime);
     };
-  }, [enabled, ensureEngine]);
+  }, [enabled, ensureEngine, mode]);
 
   useEffect(
     () => () => {

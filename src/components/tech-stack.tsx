@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState, useSyncExternalStore } from "react";
 import type { CSSProperties, PointerEvent } from "react";
 import { techCategories, techStack, type TechCategory } from "@/data/tech-stack";
-import { getNote, useTechAudio } from "@/lib/tech-audio";
+import { getNote, useTechAudio, type TechSoundMode } from "@/lib/tech-audio";
 import { cn } from "@/lib/cn";
 import { TechIcon } from "./tech-icons";
 import { VolumeIcon, VolumeOffIcon } from "./icons";
@@ -11,6 +11,7 @@ import { VolumeIcon, VolumeOffIcon } from "./icons";
 type Filter = "all" | TechCategory;
 
 const SOUND_KEY = "tech-stack-sound";
+const SOUND_MODE_KEY = "tech-stack-sound-mode";
 
 /* Small external store so the saved preference can be read during hydration
    without a setState-inside-effect. */
@@ -45,6 +46,35 @@ const soundStore = (() => {
   };
 })();
 
+const soundModeStore = (() => {
+  let mode: TechSoundMode = "piano";
+  let hydrated = false;
+  const listeners = new Set<() => void>();
+
+  return {
+    subscribe(listener: () => void) {
+      listeners.add(listener);
+      return () => listeners.delete(listener);
+    },
+    getSnapshot(): TechSoundMode {
+      if (!hydrated && typeof window !== "undefined") {
+        hydrated = true;
+        mode = window.localStorage.getItem(SOUND_MODE_KEY) === "keyboard" ? "keyboard" : "piano";
+      }
+      return mode;
+    },
+    getServerSnapshot(): TechSoundMode {
+      return "piano";
+    },
+    set(next: TechSoundMode) {
+      mode = next;
+      hydrated = true;
+      window.localStorage.setItem(SOUND_MODE_KEY, next);
+      listeners.forEach((listener) => listener());
+    },
+  };
+})();
+
 function Equalizer() {
   return (
     <span className="tech-eq" aria-hidden>
@@ -70,11 +100,16 @@ export function TechStack({
     soundStore.getSnapshot,
     soundStore.getServerSnapshot,
   );
+  const soundMode = useSyncExternalStore(
+    soundModeStore.subscribe,
+    soundModeStore.getSnapshot,
+    soundModeStore.getServerSnapshot,
+  );
   const [hovered, setHovered] = useState<number | null>(null);
   const [flashing, setFlashing] = useState<number | null>(null);
   const flashTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  const play = useTechAudio(soundOn);
+  const play = useTechAudio(soundOn, soundMode);
 
   useEffect(
     () => () => {
@@ -87,6 +122,10 @@ export function TechStack({
     soundStore.set(!soundStore.getSnapshot());
   }, []);
 
+  const setSoundMode = useCallback((mode: TechSoundMode) => {
+    soundModeStore.set(mode);
+  }, []);
+
   const visible = useMemo(
     () =>
       techStack
@@ -97,7 +136,12 @@ export function TechStack({
 
   const activeIndex = hovered ?? flashing;
   const activeTech = activeIndex === null ? null : techStack[activeIndex];
-  const activeNote = activeIndex === null ? null : getNote(activeIndex);
+  const activeSoundLabel =
+    activeIndex === null
+      ? null
+      : soundMode === "piano"
+        ? getNote(activeIndex).name
+        : "KEY";
 
   const handleEnter = (index: number) => {
     setHovered(index);
@@ -144,18 +188,45 @@ export function TechStack({
         {soundOn ? <VolumeIcon size={12} /> : <VolumeOffIcon size={12} />}
       </button>
 
+      <div
+        role="group"
+        aria-label="Tech stack sound mode"
+        className="inline-flex h-5 items-center rounded border border-line/70 p-0.5 font-mono text-[8px] uppercase tracking-[0.1em]"
+      >
+        {(["piano", "keyboard"] as const).map((mode) => {
+          const active = soundMode === mode;
+          const label = mode === "piano" ? "Piano" : "Keyboard";
+          return (
+            <button
+              key={mode}
+              type="button"
+              aria-pressed={active}
+              aria-label={`${label} sound`}
+              title={`Use ${label.toLowerCase()} sound`}
+              onClick={() => setSoundMode(mode)}
+              className={cn(
+                "h-full rounded-[2px] px-1.5 transition-colors",
+                active ? "bg-fg/10 text-fg" : "text-muted hover:text-soft",
+              )}
+            >
+              {label}
+            </button>
+          );
+        })}
+      </div>
+
       <span
         className={cn(
           "inline-flex h-4 w-[58px] items-center gap-1.5 font-mono text-[9px] uppercase tracking-[0.16em] transition-opacity duration-200",
-          activeNote ? "opacity-100" : "opacity-0",
+          activeSoundLabel ? "opacity-100" : "opacity-0",
         )}
         style={{ color: activeTech?.color }}
         aria-hidden
       >
-        {activeNote ? (
+        {activeSoundLabel ? (
           <>
             <Equalizer />
-            <span>{activeNote.name}</span>
+            <span>{activeSoundLabel}</span>
           </>
         ) : (
           <span>&nbsp;</span>
@@ -220,7 +291,7 @@ export function TechStack({
             onFocus={() => handleEnter(index)}
             onBlur={() => handleLeave(index)}
             onClick={() => handleClick(index)}
-            aria-label={`${tech.name} — play note ${getNote(index).name}`}
+            aria-label={`${tech.name} — ${soundMode === "piano" ? `play note ${getNote(index).name}` : "play mechanical keyboard sound"}`}
           >
             <TechIcon name={tech.icon} size={13} className="tech-chip-icon" />
             <span>{tech.name}</span>

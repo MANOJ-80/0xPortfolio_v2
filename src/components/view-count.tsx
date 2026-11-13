@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { LiquidMetal } from "@paper-design/shaders-react";
 import { EyeIcon } from "./icons";
 
@@ -57,6 +57,7 @@ export function ViewCount({
 }) {
   const [views, setViews] = useState<number | null>(null);
   const [webglAvailable, setWebglAvailable] = useState(false);
+  const clickAudio = useRef<HTMLAudioElement | null>(null);
 
   useEffect(() => {
     let active = true;
@@ -88,7 +89,14 @@ export function ViewCount({
           type="button"
           className="visitor-badge"
           aria-live="polite"
-          aria-label={views === null ? "Visitor count" : `You are the ${ordinal(views)} visitor`}
+          aria-label={`${views === null ? "Visitor count" : `You are the ${ordinal(views)} visitor`}. Play click sound`}
+          onClick={() => {
+            const audio = clickAudio.current;
+            if (!audio) return;
+            audio.volume = 0.5;
+            audio.currentTime = 0;
+            void audio.play().catch(() => {});
+          }}
         >
           <div className="visitor-badge-frame">
             <div className="visitor-badge-metal" aria-hidden="true">
@@ -120,6 +128,13 @@ export function ViewCount({
             </div>
           </div>
         </button>
+        <audio
+          ref={clickAudio}
+          src="/sounds/cd-metal-click.mp3"
+          preload="auto"
+          aria-hidden="true"
+          className="hidden"
+        />
       </div>
     );
   }

@@ -21,14 +21,22 @@ export async function Hero() {
 
       <div className="rise mt-6 flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between sm:gap-6">
         <div className="flex items-start gap-4 sm:gap-5">
-          <div className="relative size-20 shrink-0 overflow-hidden rounded-xl border border-line bg-bg-soft sm:size-24">
+          <div className="group relative size-20 shrink-0 overflow-hidden rounded-xl border border-line bg-bg-soft sm:size-24">
             <Image
-              src="/profile.webp"
+              src="/social/github-avatar.webp"
               alt={site.name}
               fill
               priority
               sizes="96px"
-              className="object-cover"
+              className="object-cover transition-all duration-[1200ms] ease-in-out group-hover:scale-[0.98] group-hover:opacity-0"
+            />
+            <Image
+              src="/social/linkedin-avatar.webp"
+              alt=""
+              aria-hidden="true"
+              fill
+              sizes="96px"
+              className="scale-[1.04] object-cover opacity-0 transition-all duration-[1200ms] ease-in-out group-hover:scale-100 group-hover:opacity-100"
             />
           </div>
 
