@@ -4,7 +4,6 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { site } from "@/data/site";
 import { cn } from "@/lib/cn";
-import { DownloadIcon } from "./icons";
 import { ThemeToggle } from "./theme-toggle";
 
 const links = [
@@ -56,16 +55,6 @@ export function SiteHeader() {
           <span className="mx-1 hidden h-4 w-px bg-line sm:block" />
 
           <ThemeToggle />
-
-          <a
-            href={site.resume}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="ml-1 hidden items-center gap-1.5 rounded-full border border-line px-3 py-1.5 font-mono text-[10px] uppercase tracking-[0.18em] text-soft transition-colors hover:border-accent hover:text-fg sm:flex"
-          >
-            <DownloadIcon size={12} />
-            Resume
-          </a>
         </nav>
       </div>
     </header>

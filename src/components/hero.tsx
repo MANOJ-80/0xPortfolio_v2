@@ -1,10 +1,9 @@
 import Image from "next/image";
-import Link from "next/link";
 import { homeAbout, homeTagline, site } from "@/data/site";
 import { Contributions } from "./contributions";
 import { DiscordChip } from "./discord-chip";
 import { HeroBanner } from "./hero-banner";
-import { ArrowUpRightIcon, MailIcon } from "./icons";
+import { ArrowUpRightIcon } from "./icons";
 import { getCurrentAge } from "@/lib/age";
 import { getSocialProfiles } from "@/lib/profiles";
 import { RoleRotator } from "./role-rotator";
@@ -77,27 +76,6 @@ export async function Hero() {
             </li>
           ))}
         </ul>
-      </div>
-
-      <div
-        className="rise mt-7 flex flex-wrap items-center gap-2"
-        style={{ animationDelay: "180ms" }}
-      >
-        <Link
-          href="/work"
-          className="group inline-flex items-center gap-2 rounded-md bg-accent-bg px-4 py-2.5 font-mono text-[10px] uppercase tracking-[0.18em] text-accent-ink transition-transform hover:-translate-y-0.5"
-        >
-          Selected work
-          <ArrowUpRightIcon size={13} className="transition-transform group-hover:translate-x-0.5" />
-        </Link>
-
-        <a
-          href={`mailto:${site.email}`}
-          className="inline-flex items-center gap-2 rounded-md border border-line bg-bg-soft px-4 py-2.5 font-mono text-[10px] uppercase tracking-[0.18em] text-soft transition-colors hover:border-accent/45 hover:text-fg"
-        >
-          <MailIcon size={13} />
-          Send an email
-        </a>
       </div>
 
       <div className="rise mt-8" style={{ animationDelay: "240ms" }}>

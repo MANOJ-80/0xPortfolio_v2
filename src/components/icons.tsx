@@ -165,16 +165,6 @@ export function CodeIcon({ className, size = 16 }: IconProps) {
   );
 }
 
-export function FileTextIcon({ className, size = 16 }: IconProps) {
-  return (
-    <svg {...base(size)} className={className}>
-      <path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z" />
-      <path d="M14 3v5h5" />
-      <path d="M9 13h6M9 17h4" />
-    </svg>
-  );
-}
-
 export function DiscordIcon({ className, size = 16 }: IconProps) {
   return (
     <svg
@@ -203,6 +193,5 @@ export const socialIcons = {
   x: XIcon,
   linkedin: LinkedInIcon,
   mail: MailIcon,
-  file: FileTextIcon,
   discord: DiscordIcon,
 };
