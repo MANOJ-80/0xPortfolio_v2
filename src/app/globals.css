@@ -651,16 +651,6 @@
   flex-wrap: nowrap;
 }
 
-.footer-quote-count {
-  min-width: 3.1rem;
-  color: var(--muted);
-  font-family: var(--font-geist-mono), ui-monospace, monospace;
-  font-size: 0.58rem;
-  font-variant-numeric: tabular-nums;
-  letter-spacing: 0.06em;
-  text-align: right;
-}
-
 .footer-quote-dot {
   width: 6px;
   height: 6px;

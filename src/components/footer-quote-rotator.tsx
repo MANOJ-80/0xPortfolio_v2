@@ -300,19 +300,34 @@ const quotes: Quote[] = [
   },
 ];
 
+function createRandomQuoteOrder() {
+  const order = quotes.map((_, index) => index);
+
+  for (let index = order.length - 1; index > 0; index -= 1) {
+    const randomIndex = Math.floor(Math.random() * (index + 1));
+    [order[index], order[randomIndex]] = [order[randomIndex], order[index]];
+  }
+
+  return order;
+}
+
 export function FooterQuoteRotator() {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [quoteOrder, setQuoteOrder] = useState(() => quotes.map((_, index) => index));
   const [paused, setPaused] = useState(false);
   const [webglAvailable, setWebglAvailable] = useState(false);
-  const quote = quotes[activeIndex];
+  const quote = quotes[quoteOrder[activeIndex]];
   const maxVisibleDots = 7;
   const firstVisibleDot = Math.max(
     0,
     Math.min(activeIndex - Math.floor(maxVisibleDots / 2), quotes.length - maxVisibleDots),
   );
-  const visibleQuotes = quotes
+  const visibleQuotes = quoteOrder
     .slice(firstVisibleDot, firstVisibleDot + maxVisibleDots)
-    .map((item, offset) => ({ item, index: firstVisibleDot + offset }));
+    .map((quoteIndex, offset) => ({
+      item: quotes[quoteIndex],
+      index: firstVisibleDot + offset,
+    }));
   const initials = quote.author
     .split(" ")
     .map((part) => part[0])
@@ -325,6 +340,8 @@ export function FooterQuoteRotator() {
   };
 
   useEffect(() => {
+    setQuoteOrder(createRandomQuoteOrder());
+
     try {
       const canvas = document.createElement("canvas");
       setWebglAvailable(Boolean(canvas.getContext("webgl2") || canvas.getContext("webgl")));
@@ -432,9 +449,6 @@ export function FooterQuoteRotator() {
           >
             <ArrowRightIcon size={15} />
           </button>
-          <span className="footer-quote-count" aria-live="polite">
-            {String(activeIndex + 1).padStart(2, "0")} / {String(quotes.length).padStart(2, "0")}
-          </span>
         </nav>
       </div>
     </section>
