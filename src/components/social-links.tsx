@@ -12,11 +12,9 @@ function formatStat(stat: { value: number; compact?: boolean; display?: string }
 }
 
 export function SocialLinks({
-  age,
   profiles,
   children,
 }: {
-  age: number | null;
   profiles: SocialProfile[];
   children?: React.ReactNode;
 }) {
@@ -88,7 +86,6 @@ export function SocialLinks({
                   </div>
 
                   <p className="mt-3 line-clamp-2 text-[12px] leading-relaxed text-soft">
-                    {profile.showAge && age !== null ? `${age} · ` : ""}
                     {profile.bio}
                   </p>
 

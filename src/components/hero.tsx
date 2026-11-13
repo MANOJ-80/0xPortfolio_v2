@@ -105,7 +105,7 @@ export async function Hero() {
           Here are my <span className="font-medium text-fg">socials</span>
         </p>
 
-        <SocialLinks age={age} profiles={profiles}>
+        <SocialLinks profiles={profiles}>
           <DiscordChip />
         </SocialLinks>
       </div>

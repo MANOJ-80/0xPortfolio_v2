@@ -16,7 +16,7 @@ export const site = {
   location: "Coimbatore, India",
   timeZone: "Asia/Kolkata",
   github: "MANOJ-80",
-  resume: "/resume.pdf",
+  resume: "/resume_masked_full.pdf",
   year: 2026,
   dob: "2005-10-27",
   availability: "Open to full-time roles & freelance work",
@@ -32,7 +32,6 @@ export const site = {
       location: "Coimbatore, India",
       avatar: "/social/github-avatar.webp",
       banner: "/banner-poster.webp",
-      showAge: false,
       stats: [
         { value: 66, label: "Repositories" },
         { value: 28, label: "Followers" },
@@ -49,7 +48,6 @@ export const site = {
       location: "127.0.0.1",
       avatar: "/social/x-avatar.webp",
       banner: "/banner-poster.webp",
-      showAge: true,
       stats: [
         { value: 12, label: "Followers" },
         { value: 163, label: "Posts" },
@@ -66,7 +64,6 @@ export const site = {
       location: "Coimbatore, India",
       avatar: "/social/linkedin-avatar.webp",
       banner: "/banner-poster.webp",
-      showAge: false,
       stats: [
         { value: 3000, label: "Followers", compact: true },
         { value: 500, label: "Connections", display: "500+" },
@@ -83,13 +80,12 @@ export const site = {
       location: "Coimbatore, India",
       avatar: "/profile.webp",
       banner: "/banner-poster.webp",
-      showAge: false,
       stats: [],
     },
     {
       key: "resume",
       label: "Resume",
-      href: "/resume.pdf",
+      href: "/resume_masked_full.pdf",
       icon: "file" as const,
       name: "Manoj Ganesan",
       handle: "resume.pdf",
@@ -97,7 +93,6 @@ export const site = {
       location: "Coimbatore, India",
       avatar: "/profile.webp",
       banner: "/social/resume-banner.webp",
-      showAge: false,
       stats: [
         { value: 1, label: "Page" },
         { value: 0, label: "File", display: "PDF" },

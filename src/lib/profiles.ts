@@ -24,7 +24,6 @@ export type SocialProfile = {
   location: string;
   avatar: string;
   banner: string;
-  showAge: boolean;
   stats: ProfileStat[];
 };
 
@@ -128,7 +127,6 @@ export async function getSocialProfiles(): Promise<SocialProfile[]> {
       location: extra.location || social.location,
       avatar: social.avatar,
       banner: social.banner,
-      showAge: social.showAge,
       stats: extra.stats?.length ? extra.stats : social.stats,
     };
   });
