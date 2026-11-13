@@ -9,7 +9,6 @@ export type Project = {
   stack: string[];
   links: { label: string; href: string }[];
   cover?: string;
-  coverFit?: "cover" | "contain";
   coverTone?: "paper" | "ink" | "steel" | "sand";
   featured?: boolean;
   overview: string;
@@ -33,7 +32,7 @@ export const projects: Project[] = [
       { label: "Live", href: "https://nexigent-tau.vercel.app" },
       { label: "GitHub", href: "https://github.com/MANOJ-80/0xNexigent" },
     ],
-    cover: "/work/0xnexigent.png",
+    cover: "/work/0xnexigent.webp",
     coverTone: "ink",
     featured: true,
     overview:
@@ -64,8 +63,6 @@ export const projects: Project[] = [
       { label: "GitHub", href: "https://github.com/MANOJ-80/0xMemory" },
       { label: "Roadmap", href: "https://github.com/MANOJ-80/0xMemory#readme" },
     ],
-    cover: "/work/0xmemory-desktop.webp",
-    coverFit: "contain",
     coverTone: "paper",
     featured: true,
     overview:
@@ -119,17 +116,12 @@ export const projects: Project[] = [
     type: "Peer-to-peer systems",
     tagline: "File transfer that never touches a server.",
     year: "2026",
-    status: "Live",
+    status: "Open source",
     summary:
       "Browser-native file transfer over WebRTC DataChannels with chunked transport, SHA-256 verification, resend recovery and ephemeral room sessions.",
     stack: ["WebRTC", "JavaScript", "Node.js", "Docker"],
-    links: [
-      { label: "Live", href: "https://zeroxlynk.onrender.com/" },
-      { label: "GitHub", href: "https://github.com/MANOJ-80/0xLynk" },
-    ],
-    cover: "/work/0xLynk-desktop.webp",
-    coverFit: "contain",
-    coverTone: "ink",
+    links: [{ label: "GitHub", href: "https://github.com/MANOJ-80/0xLynk" }],
+    coverTone: "sand",
     featured: true,
     overview:
       "A privacy-first transfer tool where payload bytes stay peer-to-peer. The backend only handles signaling — files are never stored, proxied, or logged.",

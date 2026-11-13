@@ -1,25 +1,7 @@
 import Link from "next/link";
 import type { Project } from "@/data/projects";
-import { ArrowUpRightIcon, GitHubIcon } from "./icons";
+import { ArrowUpRightIcon } from "./icons";
 import { ProjectArt } from "./project-art";
-
-function GlobeIcon({ className }: { className?: string }) {
-  return (
-    <svg
-      aria-hidden="true"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.6"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className={className}
-    >
-      <circle cx="12" cy="12" r="9" />
-      <path d="M3 12h18M12 3a15 15 0 0 1 0 18m0-18a15 15 0 0 0 0 18" />
-    </svg>
-  );
-}
 
 export function ProjectCard({
   project,
@@ -28,73 +10,51 @@ export function ProjectCard({
   project: Project;
   priority?: boolean;
 }) {
-  const liveLink = project.links.find((link) => link.label === "Live");
-  const githubLink = project.links.find((link) => link.label === "GitHub");
-
   return (
-    <article className="project-card group">
-      <Link
-        href={`/work/${project.slug}`}
-        aria-label={`Read the ${project.name} case study`}
-        className="project-card-art block"
-      >
-        <ProjectArt project={project} priority={priority} />
-        <span className="project-card-view">
-          View project <ArrowUpRightIcon size={12} />
-        </span>
-      </Link>
+    <Link
+      href={`/work/${project.slug}`}
+      className="group flex flex-col overflow-hidden rounded-lg border border-line bg-bg-soft/50 transition-all duration-300 hover:-translate-y-0.5 hover:border-accent/45 hover:bg-bg-soft"
+    >
+      <div className="relative aspect-[16/10] overflow-hidden border-b border-line">
+        <div className="size-full grayscale transition-[filter,transform] duration-[700ms] ease-out group-hover:scale-[1.035] group-hover:grayscale-0">
+          <ProjectArt project={project} priority={priority} />
+        </div>
 
-      <div className="project-card-content">
-        <div className="flex items-center justify-between gap-3">
-          <h3 className="min-w-0 truncate text-[17px] font-semibold tracking-tight text-fg">
-            <Link href={`/work/${project.slug}`} className="project-card-title">
-              {project.name}
-            </Link>
-          </h3>
-          <span className="inline-flex shrink-0 items-center gap-1.5 text-[12px] text-muted">
-            <span className={`project-status-dot ${liveLink ? "is-live" : ""}`} />
-            {liveLink ? "Live" : project.status}
+        <div className="pointer-events-none absolute inset-0 flex items-end justify-start bg-gradient-to-t from-black/55 via-black/5 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+          <span className="m-3 inline-flex translate-y-1.5 items-center gap-1.5 rounded-full border border-white/15 bg-black/55 px-3 py-1.5 font-mono text-[9px] uppercase tracking-[0.18em] text-white backdrop-blur-sm transition-transform duration-300 ease-out group-hover:translate-y-0">
+            View case study
+            <ArrowUpRightIcon size={11} />
           </span>
         </div>
+      </div>
 
-        <p className="mt-0.5 text-[12px] text-muted">{project.tagline}</p>
-        <p className="mt-3 text-[13px] leading-[1.55] text-soft">{project.summary}</p>
+      <div className="flex flex-1 flex-col p-4 sm:p-5">
+        <div className="flex items-start justify-between gap-3">
+          <h3 className="font-mono text-[15px] tracking-tight text-fg">{project.name}</h3>
+          <ArrowUpRightIcon
+            size={15}
+            className="mt-0.5 shrink-0 text-muted transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-accent"
+          />
+        </div>
 
-        <div className="mt-5 flex items-center justify-between gap-3">
-          <ul className="flex min-w-0 flex-wrap gap-1.5" aria-label={`${project.name} technologies`}>
-            {project.stack.slice(0, 4).map((tech) => (
-              <li key={tech} className="project-tag">{tech}</li>
-            ))}
-          </ul>
+        <p className="mt-2 text-[13px] leading-relaxed text-muted">{project.tagline}</p>
 
-          <div className="flex shrink-0 items-center gap-3 pl-1">
-            {liveLink && (
-              <a
-                href={liveLink.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={`${project.name} live website`}
-                title="Live website"
-                className="project-icon-link"
-              >
-                <GlobeIcon className="size-[17px]" />
-              </a>
-            )}
-            {githubLink && (
-              <a
-                href={githubLink.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={`${project.name} on GitHub`}
-                title="GitHub repository"
-                className="project-icon-link"
-              >
-                <GitHubIcon size={17} />
-              </a>
-            )}
-          </div>
+        <div className="mt-auto flex flex-wrap gap-1.5 pt-5">
+          {project.stack.slice(0, 3).map((tech) => (
+            <span
+              key={tech}
+              className="rounded-full border border-line px-2 py-0.5 font-mono text-[9px] uppercase tracking-[0.1em] text-soft"
+            >
+              {tech}
+            </span>
+          ))}
+          {project.stack.length > 3 && (
+            <span className="rounded-full border border-line px-2 py-0.5 font-mono text-[9px] uppercase tracking-[0.1em] text-muted">
+              +{project.stack.length - 3}
+            </span>
+          )}
         </div>
       </div>
-    </article>
+    </Link>
   );
 }
