@@ -16,6 +16,29 @@ type ApiResponse = {
   contributions: ContributionDay[];
 };
 
+/** Calendar months to draw, including the current partial one. */
+const MONTHS_SHOWN = 12;
+
+/**
+ * GitHub returns a rolling 365 days, which straddles 13 calendar months and
+ * makes the graph wider than the rest of the page. Trim to the first day of the
+ * month 11 months back so exactly 12 month labels fit.
+ */
+function trimToMonths(days: ContributionDay[]): ContributionDay[] {
+  if (days.length === 0) return days;
+
+  const last = new Date(`${days[days.length - 1].date}T00:00:00Z`);
+  const start = Date.UTC(
+    last.getUTCFullYear(),
+    last.getUTCMonth() - (MONTHS_SHOWN - 1),
+    1,
+  );
+
+  return days.filter(
+    (day) => new Date(`${day.date}T00:00:00Z`).getTime() >= start,
+  );
+}
+
 /**
  * GitHub's contribution graph is not exposed over REST, so we read it through
  * a public contributions proxy and cache the result for a day.
@@ -32,9 +55,11 @@ export async function getContributions(): Promise<ContributionData | null> {
     if (!res.ok) return null;
 
     const data = (await res.json()) as ApiResponse;
+    const days = trimToMonths(data.contributions);
+
     return {
-      total: data.total.lastYear ?? 0,
-      days: data.contributions,
+      total: days.reduce((sum, day) => sum + day.count, 0),
+      days,
     };
   } catch {
     return null;
