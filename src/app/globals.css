@@ -294,59 +294,114 @@
   background-size: 100% 1px;
 }
 
-@property --visitor-angle {
-  syntax: "<angle>";
-  inherits: false;
-  initial-value: 0deg;
+.visitor-badge-wrap {
+  position: relative;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: auto;
 }
 
 .visitor-badge {
-  --visitor-angle: 0deg;
   position: relative;
-  isolation: isolate;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.28em;
-  padding: 0.72rem 1.35rem;
-  border: 1px solid transparent;
+  display: block;
+  padding: 0;
+  border: 0;
+  outline: none;
+  background: transparent;
+  cursor: pointer;
+  transform: scale(0.9);
+  transition: transform 180ms ease;
+}
+
+.visitor-badge:active {
+  transform: scale(0.882);
+}
+
+.visitor-badge-frame {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  padding: 4px;
   border-radius: 999px;
-  background:
-    linear-gradient(var(--bg), var(--bg)) padding-box,
-    conic-gradient(
-      from var(--visitor-angle),
-      #ff42d0 0deg,
-      #ff42d0 12deg,
-      #fff24d 22deg,
-      #8cff50 31deg,
-      transparent 43deg 168deg,
-      #25d8ff 183deg,
-      #a855f7 198deg,
-      transparent 212deg 325deg,
-      #ff42d0 342deg,
-      #ff42d0 360deg
-    ) border-box;
-  color: var(--fg);
+  box-shadow: 0 20px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+.visitor-badge-metal {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  overflow: hidden;
+  border-radius: 999px;
+}
+
+.visitor-badge-interior {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 12px 24px;
+  border-radius: 999px;
+  background: #fff;
+  color: #171717;
   font-family: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
-  font-size: 0.78rem;
-  font-weight: 550;
-  line-height: 1;
-  box-shadow:
-    0 0 8px rgba(255, 66, 208, 0.26),
-    0 0 16px rgba(37, 216, 255, 0.17),
-    0 0 24px rgba(140, 255, 80, 0.12);
-  animation: visitor-glow-turn 4s linear infinite;
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.5;
+  white-space: nowrap;
+  transition: background-color 180ms ease;
 }
 
-@keyframes visitor-glow-turn {
-  to {
-    --visitor-angle: 360deg;
-  }
+.visitor-badge:hover .visitor-badge-interior {
+  background: #fafafa;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .visitor-badge {
-    animation: none;
-  }
+.dark .visitor-badge-interior {
+  background: #050506;
+  color: #fff;
+}
+
+.dark .visitor-badge:hover .visitor-badge-interior {
+  background: #171717;
+}
+
+.visitor-badge-shine {
+  position: absolute;
+  z-index: 20;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    110deg,
+    transparent 30%,
+    rgba(255, 215, 0, 0.2) 45%,
+    rgba(255, 215, 0, 0.1) 50%,
+    transparent 70%
+  );
+  background-size: 200% auto;
+  animation: visitor-shine 3s linear infinite;
+}
+
+.visitor-badge:hover .visitor-badge-shine {
+  animation-duration: 1s;
+}
+
+.visitor-badge-label {
+  position: relative;
+  z-index: 30;
+  font-weight: 700;
+}
+
+@keyframes visitor-shine {
+  from { background-position: -200% center; }
+  to { background-position: 200% center; }
+}
+
+@media (min-width: 768px) {
+  .visitor-badge { transform: scale(1); }
+  .visitor-badge:active { transform: scale(0.98); }
 }
 
 .footer-cta {

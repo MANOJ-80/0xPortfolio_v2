@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { LiquidMetal } from "@paper-design/shaders-react";
 import { EyeIcon } from "./icons";
 
 /**
@@ -26,7 +27,7 @@ function loadViews() {
   return pending;
 }
 
-function ordinal(value: number) {
+function ordinalParts(value: number) {
   const remainder = value % 100;
   const suffix =
     remainder >= 11 && remainder <= 13
@@ -39,7 +40,12 @@ function ordinal(value: number) {
             ? "rd"
             : "th";
 
-  return `${value.toLocaleString("en-US")}${suffix}`;
+  return { number: value.toLocaleString("en-US"), suffix };
+}
+
+function ordinal(value: number) {
+  const { number, suffix } = ordinalParts(value);
+  return `${number}${suffix}`;
 }
 
 export function ViewCount({
@@ -50,6 +56,7 @@ export function ViewCount({
   variant?: "compact" | "visitor";
 }) {
   const [views, setViews] = useState<number | null>(null);
+  const [webglAvailable, setWebglAvailable] = useState(false);
 
   useEffect(() => {
     let active = true;
@@ -63,14 +70,57 @@ export function ViewCount({
     };
   }, []);
 
+  useEffect(() => {
+    try {
+      const canvas = document.createElement("canvas");
+      setWebglAvailable(Boolean(canvas.getContext("webgl2") || canvas.getContext("webgl")));
+    } catch {
+      setWebglAvailable(false);
+    }
+  }, []);
+
+  const visitorOrdinal = views === null ? null : ordinalParts(views);
+
   if (variant === "visitor") {
     return (
-      <span
-        className={`visitor-badge ${className ?? ""}`}
-        title={views === null ? "Visitor count" : `${views.toLocaleString("en-US")} page views`}
-      >
-        You are the <span className="tabular-nums">{views === null ? "—" : ordinal(views)}</span> visitor
-      </span>
+      <div className={`visitor-badge-wrap ${className ?? ""}`}>
+        <button
+          type="button"
+          className="visitor-badge"
+          aria-live="polite"
+          aria-label={views === null ? "Visitor count" : `You are the ${ordinal(views)} visitor`}
+        >
+          <div className="visitor-badge-frame">
+            <div className="visitor-badge-metal" aria-hidden="true">
+              {webglAvailable && (
+                <LiquidMetal
+                  width="100%"
+                  height="100%"
+                  colorBack="#6b5828"
+                  colorTint="#ffd700"
+                  speed={0.3}
+                  repetition={4}
+                  distortion={0.2}
+                  softness={0}
+                  shiftRed={0.3}
+                  shiftBlue={-0.3}
+                  angle={45}
+                  shape="none"
+                  scale={1}
+                  fit="cover"
+                />
+              )}
+            </div>
+            <div className="visitor-badge-interior">
+              <span className="visitor-badge-shine" aria-hidden="true" />
+              <span className="visitor-badge-label">
+                You are the <span className="tabular-nums">{visitorOrdinal?.number ?? "—"}</span>
+                {visitorOrdinal && <>{"\u2009"}<span>{visitorOrdinal.suffix}</span></>} visitor
+              </span>
+            </div>
+          </div>
+        </button>
+      </div>
     );
   }
 
