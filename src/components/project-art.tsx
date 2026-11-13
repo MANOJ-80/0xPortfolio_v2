@@ -2,11 +2,11 @@ import Image from "next/image";
 import type { Project } from "@/data/projects";
 
 const tones = {
-  lime: {
+  paper: {
     background:
-      "linear-gradient(150deg, #d9f9a6 0%, #c2f24a 55%, #a7d92f 100%)",
-    foreground: "#101300",
-    muted: "rgba(16,19,0,0.55)",
+      "linear-gradient(150deg, #f4f4ef 0%, #dedfd7 55%, #c3c5bb 100%)",
+    foreground: "#15160f",
+    muted: "rgba(21,22,15,0.55)",
   },
   ink: {
     background:

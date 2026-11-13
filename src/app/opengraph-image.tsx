@@ -35,7 +35,7 @@ export default function OpenGraphImage() {
 
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
           <div style={{ display: "flex", gap: 10, fontSize: 25, letterSpacing: -0.5 }}>
-            <span style={{ color: "#c2f24a" }}>0x</span>
+            <span style={{ color: "#e8e9e3" }}>0x</span>
             <span>Echo</span>
             <span style={{ color: "#83867c" }}>~/</span>
           </div>
@@ -49,7 +49,7 @@ export default function OpenGraphImage() {
             style={{
               fontSize: 18,
               letterSpacing: 5,
-              color: "#c2f24a",
+              color: "#e8e9e3",
               marginBottom: 22,
             }}
           >
@@ -66,7 +66,7 @@ export default function OpenGraphImage() {
             }}
           >
             Manoj Ganesan
-            <span style={{ color: "#c2f24a" }}>.</span>
+            <span style={{ color: "#e8e9e3" }}>.</span>
           </div>
           <div
             style={{
@@ -94,7 +94,7 @@ export default function OpenGraphImage() {
           }}
         >
           <span>PYTHON · FASTAPI · TYPESCRIPT · POSTGRES · AWS</span>
-          <span style={{ color: "#c2f24a" }}>OPEN TO WORK</span>
+          <span style={{ color: "#e8e9e3" }}>OPEN TO WORK</span>
         </div>
       </div>
     ),

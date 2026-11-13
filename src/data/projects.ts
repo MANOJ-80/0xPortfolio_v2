@@ -9,7 +9,7 @@ export type Project = {
   stack: string[];
   links: { label: string; href: string }[];
   cover?: string;
-  coverTone?: "lime" | "ink" | "steel" | "sand";
+  coverTone?: "paper" | "ink" | "steel" | "sand";
   featured?: boolean;
   overview: string;
   problems: string[];
@@ -63,7 +63,7 @@ export const projects: Project[] = [
       { label: "GitHub", href: "https://github.com/MANOJ-80/0xMemory" },
       { label: "Roadmap", href: "https://github.com/MANOJ-80/0xMemory#readme" },
     ],
-    coverTone: "lime",
+    coverTone: "paper",
     featured: true,
     overview:
       "Every new agent session starts from zero. 0xMemory gives coding agents a durable, portable memory that lives with the project instead of inside a vendor's cloud.",
@@ -180,7 +180,7 @@ export const projects: Project[] = [
       { label: "GitHub", href: "https://github.com/OWASP/cve-lite-cli" },
       { label: "npm", href: "https://www.npmjs.com/package/cve-lite-cli" },
     ],
-    coverTone: "lime",
+    coverTone: "paper",
     featured: true,
     overview:
       "Most scanners stop at a list of advisories. cve-lite-cli is built around the next question: which of these are actually reachable, and what command fixes them?",
