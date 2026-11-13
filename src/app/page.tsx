@@ -14,7 +14,6 @@ export default function HomePage() {
       <Hero />
 
       <Section
-        index="01"
         title="Projects"
         aside={
           <Link href="/work" className="transition-colors hover:text-accent">
@@ -43,11 +42,11 @@ export default function HomePage() {
         </div>
       </Section>
 
-      <Section index="02" title="Experience" aside="2023 — 2027">
+      <Section title="Experience" aside="2023 — 2027">
         <ExperienceList />
       </Section>
 
-      <Section index="03" title="Toolkit" aside="What I reach for">
+      <Section title="Toolkit" aside="What I reach for">
         <div className="divide-y divide-dashed divide-line border-y border-dashed border-line">
           {stack.map((group) => (
             <div
@@ -70,7 +69,7 @@ export default function HomePage() {
         </div>
       </Section>
 
-      <Section index="04" title="Contact" aside={site.availability}>
+      <Section title="Contact" aside={site.availability}>
         <div className="flex flex-col gap-8">
           <h2 className="max-w-[18ch] font-serif text-[clamp(2.4rem,7vw,4.25rem)] leading-[0.98] tracking-[-0.02em]">
             Let&apos;s build <span className="italic">something</span>
