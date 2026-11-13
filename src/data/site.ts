@@ -18,7 +18,6 @@ export const site = {
   github: "MANOJ-80",
   year: 2026,
   dob: "2005-10-27",
-  availability: "Open to full-time roles & freelance work",
   socials: [
     {
       key: "github",
@@ -75,7 +74,7 @@ export const site = {
       icon: "mail" as const,
       name: "Manoj Ganesan",
       handle: "manojofficial.018@gmail.com",
-      bio: "Open to full-time roles & freelance work",
+      bio: "",
       location: "Coimbatore, India",
       avatar: "/profile.webp",
       banner: "/banner-poster.webp",

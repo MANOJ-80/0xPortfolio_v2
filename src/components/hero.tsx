@@ -8,7 +8,6 @@ import { getCurrentAge } from "@/lib/age";
 import { getSocialProfiles } from "@/lib/profiles";
 import { RoleRotator } from "./role-rotator";
 import { SocialLinks } from "./social-links";
-import { ViewCount } from "./view-count";
 
 export async function Hero() {
   const [age, profiles] = await Promise.all([
@@ -45,7 +44,6 @@ export async function Hero() {
           </div>
         </div>
 
-        <ViewCount className="self-end sm:self-start sm:pt-1.5" />
       </div>
 
       <div

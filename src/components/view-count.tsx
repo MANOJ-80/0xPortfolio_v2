@@ -26,7 +26,29 @@ function loadViews() {
   return pending;
 }
 
-export function ViewCount({ className }: { className?: string }) {
+function ordinal(value: number) {
+  const remainder = value % 100;
+  const suffix =
+    remainder >= 11 && remainder <= 13
+      ? "th"
+      : value % 10 === 1
+        ? "st"
+        : value % 10 === 2
+          ? "nd"
+          : value % 10 === 3
+            ? "rd"
+            : "th";
+
+  return `${value.toLocaleString("en-US")}${suffix}`;
+}
+
+export function ViewCount({
+  className,
+  variant = "compact",
+}: {
+  className?: string;
+  variant?: "compact" | "visitor";
+}) {
   const [views, setViews] = useState<number | null>(null);
 
   useEffect(() => {
@@ -40,6 +62,17 @@ export function ViewCount({ className }: { className?: string }) {
       active = false;
     };
   }, []);
+
+  if (variant === "visitor") {
+    return (
+      <span
+        className={`visitor-badge ${className ?? ""}`}
+        title={views === null ? "Visitor count" : `${views.toLocaleString("en-US")} page views`}
+      >
+        You are the <span className="tabular-nums">{views === null ? "—" : ordinal(views)}</span> visitor
+      </span>
+    );
+  }
 
   return (
     <span

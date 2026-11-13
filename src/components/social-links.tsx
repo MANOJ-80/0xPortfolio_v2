@@ -85,9 +85,11 @@ export function SocialLinks({
                     </div>
                   </div>
 
-                  <p className="mt-3 line-clamp-2 text-[12px] leading-relaxed text-soft">
-                    {profile.bio}
-                  </p>
+                  {profile.bio && (
+                    <p className="mt-3 line-clamp-2 text-[12px] leading-relaxed text-soft">
+                      {profile.bio}
+                    </p>
+                  )}
 
                   <p className="mt-2 flex items-center gap-1.5 text-[11px] leading-none text-muted">
                     <MapPinIcon size={12} className="shrink-0" />

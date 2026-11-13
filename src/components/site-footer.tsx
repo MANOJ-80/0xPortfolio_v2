@@ -1,39 +1,51 @@
 import Link from "next/link";
 import { site } from "@/data/site";
-import { LocalClock } from "./local-clock";
 import { socialIcons } from "./icons";
+import { ViewCount } from "./view-count";
 
 export function SiteFooter() {
-  return (
-    <footer className="bleed py-10">
-      <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
-        <div className="flex flex-col gap-1">
-          <p className="font-mono text-[11px] text-soft">
-            © {site.year} {site.name}
-          </p>
-          <p className="label">
-            {site.location.split(",")[0]} ·{" "}
-            <LocalClock timeZone={site.timeZone} /> IST
-          </p>
-        </div>
+  const footerSocials = site.socials.filter((social) =>
+    ["x", "gmail", "github"].includes(social.key),
+  );
+  const xProfile = site.socials.find((social) => social.key === "x");
 
-        <div className="flex items-center gap-4">
-          {site.socials.map((social) => {
+  return (
+    <footer className="bleed px-4 pb-7 pt-12 sm:px-6 sm:pb-8 sm:pt-16">
+      <div className="flex flex-col items-center text-center">
+        <ViewCount variant="visitor" />
+
+        <a href={`mailto:${site.email}`} className="footer-cta mt-8">
+          Let&apos;s build something extraordinary
+        </a>
+
+        <nav className="mt-7 flex items-center gap-3" aria-label="Social links">
+          {footerSocials.map((social) => {
             const Icon = socialIcons[social.icon];
             return (
               <Link
-                key={social.label}
+                key={social.key}
                 href={social.href}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={social.label}
-                className="text-muted transition-colors hover:text-accent"
+                className="footer-social-link"
               >
-                <Icon size={15} />
+                <Icon size={22} />
               </Link>
             );
           })}
-          <span className="label hidden sm:inline">Built with Next.js</span>
+        </nav>
+      </div>
+
+      <div className="mx-auto mt-14 flex max-w-[54rem] flex-col gap-3 border-t border-line-soft pt-4 text-[11px] text-muted sm:flex-row sm:items-center sm:justify-between">
+        <p>© {site.year} {site.name} <span className="px-1">·</span> Built with care</p>
+        <div className="flex items-center gap-4">
+          {xProfile && (
+            <a href={xProfile.href} target="_blank" rel="noopener noreferrer" className="footer-bottom-link">
+              DM me
+            </a>
+          )}
+          <a href={`mailto:${site.email}`} className="footer-bottom-link">Mail me</a>
         </div>
       </div>
     </footer>

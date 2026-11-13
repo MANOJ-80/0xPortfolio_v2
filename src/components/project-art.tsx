@@ -37,23 +37,28 @@ export function ProjectArt({
   priority?: boolean;
   className?: string;
 }) {
+  const tone = tones[project.coverTone ?? "ink"];
+
   if (project.cover) {
     return (
-      <div className={`relative h-full w-full overflow-hidden ${className}`}>
+      <div
+        className={`relative h-full w-full overflow-hidden ${className}`}
+        data-fit={project.coverFit ?? "cover"}
+        style={project.coverFit === "contain" ? { background: tone.background } : undefined}
+      >
         <Image
           src={project.cover}
           alt={`${project.name} preview`}
           fill
           priority={priority}
           sizes="(max-width: 768px) 100vw, 420px"
-          className="object-cover object-top"
+          className={project.coverFit === "contain" ? "object-contain" : "object-cover object-top"}
         />
         <div className="pointer-events-none absolute inset-0 ring-1 ring-inset ring-black/10" />
       </div>
     );
   }
 
-  const tone = tones[project.coverTone ?? "ink"];
   const sizeClass =
     project.name.length > 10
       ? "text-[40px] sm:text-[48px]"
@@ -64,6 +69,7 @@ export function ProjectArt({
   return (
     <div
       className={`relative h-full w-full overflow-hidden ${className}`}
+      data-fit="cover"
       style={{ background: tone.background, color: tone.foreground }}
     >
       <div className="absolute inset-0 hatch opacity-[0.22]" />
