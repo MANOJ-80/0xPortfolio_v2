@@ -1,11 +1,12 @@
 import Link from "next/link";
 import { site } from "@/data/site";
-import { featuredProjects, stack } from "@/data/projects";
+import { featuredProjects } from "@/data/projects";
 import { Hero } from "@/components/hero";
 import { Section } from "@/components/section";
 import { ProjectCard } from "@/components/project-card";
 import { ExperienceList } from "@/components/experience-list";
 import { CopyEmail } from "@/components/copy-email";
+import { TechStack } from "@/components/tech-stack";
 import { ArrowUpRightIcon, socialIcons } from "@/components/icons";
 
 export default function HomePage() {
@@ -46,28 +47,7 @@ export default function HomePage() {
         <ExperienceList />
       </Section>
 
-      <Section title="Toolkit" aside="What I reach for">
-        <div className="divide-y divide-dashed divide-line border-y border-dashed border-line">
-          {stack.map((group) => (
-            <div
-              key={group.group}
-              className="grid gap-3 py-4 sm:grid-cols-[160px_1fr] sm:gap-6"
-            >
-              <p className="label pt-1.5">{group.group}</p>
-              <div className="flex flex-wrap gap-1.5">
-                {group.items.map((item) => (
-                  <span
-                    key={item}
-                    className="rounded-full border border-line bg-bg-soft/40 px-2.5 py-1 font-mono text-[10px] tracking-[0.02em] text-soft transition-colors hover:border-accent/40 hover:text-fg"
-                  >
-                    {item}
-                  </span>
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
-      </Section>
+      <TechStack />
 
       <Section title="Contact" aside={site.availability}>
         <div className="flex flex-col gap-8">

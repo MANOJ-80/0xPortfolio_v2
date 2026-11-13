@@ -294,6 +294,159 @@
   background-size: 100% 1px;
 }
 
+/* Tech stack: chips with per-technology colour and a cursor spotlight */
+.no-scrollbar {
+  scrollbar-width: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.v-rule {
+  width: 1px;
+  background-image: repeating-linear-gradient(
+    to bottom,
+    var(--line-soft) 0 3px,
+    transparent 3px 9px
+  );
+}
+
+.tech-chip {
+  --tech: var(--fg);
+  --mx: 50%;
+  --my: 50%;
+  position: relative;
+  isolation: isolate;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.45rem 0.7rem;
+  border: 1px dashed var(--line);
+  border-radius: 7px;
+  background-color: color-mix(in srgb, var(--bg) 60%, transparent);
+  color: var(--fg-soft);
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  line-height: 1;
+  letter-spacing: 0.01em;
+  cursor: pointer;
+  animation: chip-in 0.35s cubic-bezier(0.16, 0.75, 0.3, 1) backwards;
+  transition:
+    color 0.2s ease,
+    border-color 0.2s ease,
+    background-color 0.25s ease,
+    box-shadow 0.3s ease,
+    transform 0.22s cubic-bezier(0.16, 0.75, 0.3, 1);
+}
+
+.tech-chip::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background: radial-gradient(
+    110px circle at var(--mx) var(--my),
+    color-mix(in srgb, var(--tech) 24%, transparent),
+    transparent 72%
+  );
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  pointer-events: none;
+}
+
+.tech-chip:hover,
+.tech-chip:focus-visible,
+.tech-chip[data-active="true"] {
+  color: var(--fg);
+  border-color: color-mix(in srgb, var(--tech) 60%, var(--line));
+  background-color: color-mix(in srgb, var(--tech) 9%, var(--bg));
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--tech) 14%, transparent),
+    0 8px 26px -14px color-mix(in srgb, var(--tech) 70%, transparent);
+  transform: translateY(-1.5px);
+}
+
+.tech-chip:hover::before,
+.tech-chip:focus-visible::before,
+.tech-chip[data-active="true"]::before {
+  opacity: 1;
+}
+
+.tech-chip:active {
+  transform: translateY(0) scale(0.985);
+}
+
+.tech-chip-icon {
+  color: var(--muted);
+  transition:
+    color 0.2s ease,
+    filter 0.25s ease;
+}
+
+.tech-chip:hover .tech-chip-icon,
+.tech-chip:focus-visible .tech-chip-icon,
+.tech-chip[data-active="true"] .tech-chip-icon {
+  color: var(--tech);
+  filter: drop-shadow(0 0 6px color-mix(in srgb, var(--tech) 55%, transparent));
+}
+
+.tech-eq {
+  display: inline-flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 8px;
+}
+
+.tech-eq i {
+  width: 2px;
+  height: 100%;
+  border-radius: 1px;
+  background: currentColor;
+  transform-origin: bottom;
+  animation: tech-eq 0.8s ease-in-out infinite;
+}
+
+.tech-eq i:nth-child(2) {
+  animation-delay: 0.15s;
+}
+
+.tech-eq i:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+@keyframes tech-eq {
+  0%,
+  100% {
+    transform: scaleY(0.25);
+  }
+  50% {
+    transform: scaleY(1);
+  }
+}
+
+@keyframes chip-in {
+  from {
+    opacity: 0;
+    transform: translateY(5px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tech-chip {
+    animation: none;
+  }
+  .tech-eq i {
+    animation: none;
+    transform: scaleY(0.55);
+  }
+}
+
 /* Contribution heatmap */
 .cells {
   display: grid;

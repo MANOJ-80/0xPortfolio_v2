@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { about, certifications, education, openSource, site } from "@/data/site";
-import { stack } from "@/data/projects";
 import { ExperienceList } from "@/components/experience-list";
+import { TechStack } from "@/components/tech-stack";
 import { ArrowUpRightIcon, socialIcons } from "@/components/icons";
 
 export const metadata: Metadata = {
@@ -71,25 +71,11 @@ export default function AboutPage() {
         <h2 className="mb-6 flex items-center gap-3">
           <span className="label text-accent">[02]</span>
           <span className="font-mono text-[11px] uppercase tracking-[0.22em] text-fg">
-            Toolkit
+            Tech Stack
           </span>
         </h2>
-        <div className="divide-y divide-dashed divide-line border-y border-dashed border-line">
-          {stack.map((group) => (
-            <div key={group.group} className="grid gap-3 py-4 sm:grid-cols-[160px_1fr] sm:gap-6">
-              <p className="label pt-1.5">{group.group}</p>
-              <div className="flex flex-wrap gap-1.5">
-                {group.items.map((item) => (
-                  <span
-                    key={item}
-                    className="rounded-full border border-line bg-bg-soft/40 px-2.5 py-1 font-mono text-[10px] text-soft"
-                  >
-                    {item}
-                  </span>
-                ))}
-              </div>
-            </div>
-          ))}
+        <div className="mt-6">
+          <TechStack heading={null} />
         </div>
       </section>
 
