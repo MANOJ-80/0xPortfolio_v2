@@ -29,7 +29,7 @@ export default function HomePage() {
         </div>
 
         <div className="mt-6 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
-          <p className="label">2 more case studies in the archive</p>
+          <p className="label">6 case studies, plus the project archive</p>
           <Link
             href="/work"
             className="group inline-flex items-center gap-1.5 font-mono text-[10px] uppercase tracking-[0.18em] text-soft transition-colors hover:text-accent"
