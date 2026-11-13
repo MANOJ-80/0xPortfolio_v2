@@ -2,6 +2,7 @@ import Link from "next/link";
 import { site } from "@/data/site";
 import { socialIcons } from "./icons";
 import { ViewCount } from "./view-count";
+import { FooterQuoteRotator } from "./footer-quote-rotator";
 
 export function SiteFooter() {
   const footerSocials = site.socials.filter((social) =>
@@ -36,6 +37,8 @@ export function SiteFooter() {
           })}
         </nav>
       </div>
+
+      <FooterQuoteRotator />
 
       <div className="mx-auto mt-14 flex max-w-[54rem] flex-col gap-3 border-t border-line-soft pt-4 text-[11px] text-muted sm:flex-row sm:items-center sm:justify-between">
         <p>© {site.year} {site.name} <span className="px-1">·</span> Built with care</p>
