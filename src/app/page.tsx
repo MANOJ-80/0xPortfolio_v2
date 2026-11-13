@@ -15,7 +15,7 @@ export default function HomePage() {
 
       <Section
         index="01"
-        title="Selected work"
+        title="Projects"
         aside={
           <Link href="/work" className="transition-colors hover:text-accent">
             All projects ↗

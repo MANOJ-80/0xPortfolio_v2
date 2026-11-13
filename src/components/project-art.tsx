@@ -46,7 +46,7 @@ export function ProjectArt({
           fill
           priority={priority}
           sizes="(max-width: 768px) 100vw, 420px"
-          className="object-cover object-top transition-transform duration-[900ms] ease-out group-hover:scale-[1.035]"
+          className="object-cover object-top"
         />
         <div className="pointer-events-none absolute inset-0 ring-1 ring-inset ring-black/10" />
       </div>
