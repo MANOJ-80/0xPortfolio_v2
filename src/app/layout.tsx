@@ -54,7 +54,7 @@ export const metadata: Metadata = {
     locale: "en_IN",
     images: [
       {
-        url: "/og-preview.png",
+        url: "/og-preview.jpg",
         width: 1200,
         height: 630,
         alt: `${site.name} — ${site.headline}`,
@@ -66,7 +66,12 @@ export const metadata: Metadata = {
     title: `${site.name} (${site.handle}) — ${site.role}`,
     description: site.description,
     creator: "@0xEchoDev",
-    images: ["/og-preview.png"],
+    images: [
+      {
+        url: "/og-preview.jpg",
+        alt: `${site.name} — ${site.headline}`,
+      },
+    ],
   },
   robots: { index: true, follow: true },
 };
