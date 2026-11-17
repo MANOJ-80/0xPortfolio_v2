@@ -11,7 +11,7 @@ export const site = {
   headline: "Backend systems, security tooling, AI agents.",
   description:
     "Manoj Ganesan (0xEcho) is a software engineer from India building secure backends, AI agent infrastructure and developer tools.",
-  url: "https://manojganesan.dev",
+  url: "https://manojganesan.vercel.app",
   email: "manojofficial.018@gmail.com",
   location: "Coimbatore, India",
   timeZone: "Asia/Kolkata",
