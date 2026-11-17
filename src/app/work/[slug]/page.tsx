@@ -26,6 +26,13 @@ export async function generateMetadata(props: {
       title: `${project.name} — ${project.tagline}`,
       description: project.summary,
       type: "article",
+      images: project.cover ? [project.cover] : ["/og-preview.png"],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${project.name} — ${project.tagline}`,
+      description: project.summary,
+      images: project.cover ? [project.cover] : ["/og-preview.png"],
     },
   };
 }

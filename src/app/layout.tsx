@@ -52,12 +52,21 @@ export const metadata: Metadata = {
     title: `${site.name} (${site.handle}) — ${site.role}`,
     description: site.description,
     locale: "en_IN",
+    images: [
+      {
+        url: "/og-preview.png",
+        width: 1200,
+        height: 630,
+        alt: `${site.name} — ${site.headline}`,
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: `${site.name} (${site.handle}) — ${site.role}`,
     description: site.description,
     creator: "@0xEchoDev",
+    images: ["/og-preview.png"],
   },
   robots: { index: true, follow: true },
 };
