@@ -190,6 +190,7 @@ export const favouriteSections = [
       {
         "title": "WandaVision",
         "image": "/favourites/posters/wandavision.webp",
+        "status": "Wishlist",
         "credit": "Jac Schaeffer",
         "description": "Blends the style of classic sitcoms with the MCU, in which Wanda Maximoff and Vision - two super-powered beings living their ideal suburban lives - begin to suspect that everything is not as it seems.",
         "year": "2021"

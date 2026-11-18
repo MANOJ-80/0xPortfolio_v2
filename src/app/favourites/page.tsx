@@ -89,7 +89,7 @@ export default function FavouritesPage() {
             <div className="grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 sm:gap-x-5 sm:gap-y-10">
               {shelf.items.map((item) => (
                 <div key={item.title} className="flex justify-center">
-                  <FavouritePoster item={item} />
+                  <FavouritePoster item={item} hideStatus={shelf.id === "books"} />
                 </div>
               ))}
             </div>
